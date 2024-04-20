@@ -5,6 +5,19 @@
     <title>NixieClock</title>
     <script src="script/wakelock.js"></script>
     <style>
+        /* 添加一个按钮用于调整亮度 */
+        #brightnessButton {
+            position: fixed;
+            top: 90vh;
+            right: 1vh;
+            padding: 1vh;
+            background-color: #000000;
+            color: #fff;
+            cursor: pointer;
+            z-index: 88;
+        }
+    </style>
+    <style>
         @font-face {
             font-family: 'Nixiebold-bold';
             src: url('fonts/Nixiebold-bold.woff2') format('woff2'),
@@ -302,6 +315,17 @@
 </head>
 
 <body>
+    <button id="brightnessButton"><span style="color:#834100;">lighter</span></button>
+    <script>
+        const button = document.getElementById('brightnessButton');
+        let brightness = 1; // 初始亮度为 100%
+
+        button.addEventListener('click', () => {
+
+            brightness += 0.1;
+            document.body.style.filter = `brightness(${brightness})`;
+        });
+    </script>
     <a href="https://aj300542.github.io/">
         <button id="aboutme"><span style="color:rgb(68, 44, 16)">aj300</span></button>
     </a>
@@ -378,12 +402,12 @@
             <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
             <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
         </div>
-
+ 
         <script>
             function updateDigitColor(digitClass, timeUnit) {
                 const digits = document.getElementsByClassName(digitClass);
                 for (let i = 0; i < digits.length; i++) {
-                    digits[i].style.color = '#462300';
+                    digits[i].style.color = '#311900';
                     digits[i].classList.remove('nixiebold');
                 }
                 const element = document.getElementById(`${digitClass}${timeUnit}`);
