@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>倒计时</title>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        @font-face {
+            font-family: 'Nixiebold-boldbig';
+            src: url('fonts/Nixiebold-boldbig.ttf') format('woff2'),
+                url('fonts/Nixiebold-boldbig.woff') format('woff'),
+                url('fonts/Nixiebold-boldbig.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: transparent;
+            color: #fb7c00;
+            font-family: 'Nixiebold-boldbig', Arial, sans-serif;
+            line-height: 2vh;
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+        }
+
+        .currenttime {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent;
+            line-height: 2vh;
+            vertical-align: middle;
+            z-index: 0;
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+        }
+
+        .currenttime {
+
+            letter-spacing: 0.5em;
+            font-size: 15vh;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="currenttime">
+        <div id="sz-year"></div>-
+        <div id="sz-month"></div>-
+        <div id="sz-day"></div>-
+        <div id="sz-hours-tens"></div>
+        <div id="sz-hours-ones"></div>:
+        <div id="sz-minutes-tens"></div>
+        <div id="sz-minutes-ones"></div>:
+        <div id="sz-seconds-tens"></div>
+        <div id="sz-seconds-ones"></div>
+    </div>
+    <script src="js/sz-timeDisplay.js"></script>
+
+</html>
