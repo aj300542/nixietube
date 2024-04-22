@@ -3,11 +3,12 @@
 
 <head>
     <title>NixieClock</title>
-    <script src="js/wakelock.js"></script>
+    <script src="script/wakelock.js"></script>
     <link rel="shortcut icon" href="nixie.ico">
     <style>
         /* 添加一个按钮用于调整亮度 */
-        #brightnessButton {
+        #brightnessButton,
+        #fullscreenbutt {
             position: fixed;
             top: 90vh;
             right: 1vh;
@@ -16,6 +17,18 @@
             color: #fff;
             cursor: pointer;
             z-index: 88;
+        }
+
+        #brightnessButton {
+
+            right: 1vh;
+
+        }
+
+        #fullscreenbutt {
+
+            right: 8vh;
+
         }
     </style>
     <style>
@@ -83,6 +96,7 @@
             display: flex;
             justify-content: space-between;
         }
+
         .room-Wrappera {
             left: 20vw;
         }
@@ -107,7 +121,15 @@
             left: 75vw;
         }
 
-
+        #nixieclock {
+            position: absolute;
+            top: 51.5vh;
+            left:0vh;
+            vertical-align: middle;
+            font-size: 26vh;
+            display: flex;
+            justify-content: space-between;
+        }
 
         .Clock-Wrappera,
         .Clock-Wrapperb,
@@ -187,11 +209,7 @@
         }
 
 
-        #nixieclock {
-            font-size: 26vh;
-            display: flex;
-            justify-content: space-between;
-        }
+
 
         .digitdota,
         .digitdotb {
@@ -208,11 +226,11 @@
         }
 
         .digitdota {
-            left: 36.5vw;
+            left: 35.5vw;
         }
 
         .digitdotb {
-            left: 58.5vw;
+            left: 57.5vw;
         }
 
         .digita,
@@ -317,6 +335,7 @@
 
 <body>
     <button id="brightnessButton"><span style="color:#834100;">lighter</span></button>
+    <button id="fullscreenbutt" onclick="toggleFullScreen()"><span style="color: #fb7c00">fullsreen</span></button>
     <script>
         const button = document.getElementById('brightnessButton');
         let brightness = 1; // 初始亮度为 100%
@@ -330,110 +349,82 @@
     <a href="https://aj300542.github.io/">
         <button id="aboutme"><span style="color:rgb(68, 44, 16)">aj300</span></button>
     </a>
-    <div id="nixieclock">
-        <div id="clocka">
-            <span id="digita5" class="digita" style="z-index: 10;">5</span>
-            <span id="digita6" class="digita" style="z-index: 9;">6</span>
-            <span id="digita7" class="digita" style="z-index: 8;">7</span>
-            <span id="digita4" class="digita" style="z-index: 7;">4</span>
-            <span id="digita3" class="digita" style="z-index: 6;">3</span>
-            <span id="digita8" class="digita" style="z-index: 5;">8</span>
-            <span id="digita9" class="digita" style="z-index: 4;">9</span>
-            <span id="digita2" class="digita" style="z-index: 3;">2</span>
-            <span id="digita0" class="digita" style="z-index: 2;">0</span>
-            <span id="digita1" class="digita" style="z-index: 1;">1</span>
+    <div id="content">
+        <div id="nixieclock">
+            <div id="clocka">
+                <span id="digita5" class="digita" style="z-index: 10;">5</span>
+                <span id="digita6" class="digita" style="z-index: 9;">6</span>
+                <span id="digita7" class="digita" style="z-index: 8;">7</span>
+                <span id="digita4" class="digita" style="z-index: 7;">4</span>
+                <span id="digita3" class="digita" style="z-index: 6;">3</span>
+                <span id="digita8" class="digita" style="z-index: 5;">8</span>
+                <span id="digita9" class="digita" style="z-index: 4;">9</span>
+                <span id="digita2" class="digita" style="z-index: 3;">2</span>
+                <span id="digita0" class="digita" style="z-index: 2;">0</span>
+                <span id="digita1" class="digita" style="z-index: 1;">1</span>
+            </div>
+            <div id="clockb">
+                <span id="digitb5" class="digitb" style="z-index: 10;">5</span>
+                <span id="digitb6" class="digitb" style="z-index: 9;">6</span>
+                <span id="digitb7" class="digitb" style="z-index: 8;">7</span>
+                <span id="digitb4" class="digitb" style="z-index: 7;">4</span>
+                <span id="digitb3" class="digitb" style="z-index: 6;">3</span>
+                <span id="digitb8" class="digitb" style="z-index: 5;">8</span>
+                <span id="digitb9" class="digitb" style="z-index: 4;">9</span>
+                <span id="digitb2" class="digitb" style="z-index: 3;">2</span>
+                <span id="digitb0" class="digitb" style="z-index: 2;">0</span>
+                <span id="digitb1" class="digitb" style="z-index: 1;">1</span>
+            </div>
+            <div id="clockc">
+                <span id="digitc5" class="digitc" style="z-index: 10;">5</span>
+                <span id="digitc6" class="digitc" style="z-index: 9;">6</span>
+                <span id="digitc7" class="digitc" style="z-index: 8;">7</span>
+                <span id="digitc4" class="digitc" style="z-index: 7;">4</span>
+                <span id="digitc3" class="digitc" style="z-index: 6;">3</span>
+                <span id="digitc8" class="digitc" style="z-index: 5;">8</span>
+                <span id="digitc9" class="digitc" style="z-index: 4;">9</span>
+                <span id="digitc2" class="digitc" style="z-index: 3;">2</span>
+                <span id="digitc0" class="digitc" style="z-index: 2;">0</span>
+                <span id="digitc1" class="digitc" style="z-index: 1;">1</span>
+            </div>
+            <div id="clockd">
+                <span id="digitd5" class="digitd" style="z-index: 10;">5</span>
+                <span id="digitd6" class="digitd" style="z-index: 9;">6</span>
+                <span id="digitd7" class="digitd" style="z-index: 8;">7</span>
+                <span id="digitd4" class="digitd" style="z-index: 7;">4</span>
+                <span id="digitd3" class="digitd" style="z-index: 6;">3</span>
+                <span id="digitd8" class="digitd" style="z-index: 5;">8</span>
+                <span id="digitd9" class="digitd" style="z-index: 4;">9</span>
+                <span id="digitd2" class="digitd" style="z-index: 3;">2</span>
+                <span id="digitd0" class="digitd" style="z-index: 2;">0</span>
+                <span id="digitd1" class="digitd" style="z-index: 1;">1</span>
+            </div>
+            <div id="clocke">
+                <span id="digite5" class="digite" style="z-index: 10;">5</span>
+                <span id="digite6" class="digite" style="z-index: 9;">6</span>
+                <span id="digite7" class="digite" style="z-index: 8;">7</span>
+                <span id="digite4" class="digite" style="z-index: 7;">4</span>
+                <span id="digite3" class="digite" style="z-index: 6;">3</span>
+                <span id="digite8" class="digite" style="z-index: 5;">8</span>
+                <span id="digite9" class="digite" style="z-index: 4;">9</span>
+                <span id="digite2" class="digite" style="z-index: 3;">2</span>
+                <span id="digite0" class="digite" style="z-index: 2;">0</span>
+                <span id="digite1" class="digite" style="z-index: 1;">1</span>
+            </div>
+            <div id="clockf">
+                <span id="digitf5" class="digitf" style="z-index: 10;">5</span>
+                <span id="digitf6" class="digitf" style="z-index: 9;">6</span>
+                <span id="digitf7" class="digitf" style="z-index: 8;">7</span>
+                <span id="digitf4" class="digitf" style="z-index: 7;">4</span>
+                <span id="digitf3" class="digitf" style="z-index: 6;">3</span>
+                <span id="digitf8" class="digitf" style="z-index: 5;">8</span>
+                <span id="digitf9" class="digitf" style="z-index: 4;">9</span>
+                <span id="digitf2" class="digitf" style="z-index: 3;">2</span>
+                <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
+                <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
+            </div>
         </div>
-        <div id="clockb">
-            <span id="digitb5" class="digitb" style="z-index: 10;">5</span>
-            <span id="digitb6" class="digitb" style="z-index: 9;">6</span>
-            <span id="digitb7" class="digitb" style="z-index: 8;">7</span>
-            <span id="digitb4" class="digitb" style="z-index: 7;">4</span>
-            <span id="digitb3" class="digitb" style="z-index: 6;">3</span>
-            <span id="digitb8" class="digitb" style="z-index: 5;">8</span>
-            <span id="digitb9" class="digitb" style="z-index: 4;">9</span>
-            <span id="digitb2" class="digitb" style="z-index: 3;">2</span>
-            <span id="digitb0" class="digitb" style="z-index: 2;">0</span>
-            <span id="digitb1" class="digitb" style="z-index: 1;">1</span>
-        </div>
-        <div id="clockc">
-            <span id="digitc5" class="digitc" style="z-index: 10;">5</span>
-            <span id="digitc6" class="digitc" style="z-index: 9;">6</span>
-            <span id="digitc7" class="digitc" style="z-index: 8;">7</span>
-            <span id="digitc4" class="digitc" style="z-index: 7;">4</span>
-            <span id="digitc3" class="digitc" style="z-index: 6;">3</span>
-            <span id="digitc8" class="digitc" style="z-index: 5;">8</span>
-            <span id="digitc9" class="digitc" style="z-index: 4;">9</span>
-            <span id="digitc2" class="digitc" style="z-index: 3;">2</span>
-            <span id="digitc0" class="digitc" style="z-index: 2;">0</span>
-            <span id="digitc1" class="digitc" style="z-index: 1;">1</span>
-        </div>
-        <div id="clockd">
-            <span id="digitd5" class="digitd" style="z-index: 10;">5</span>
-            <span id="digitd6" class="digitd" style="z-index: 9;">6</span>
-            <span id="digitd7" class="digitd" style="z-index: 8;">7</span>
-            <span id="digitd4" class="digitd" style="z-index: 7;">4</span>
-            <span id="digitd3" class="digitd" style="z-index: 6;">3</span>
-            <span id="digitd8" class="digitd" style="z-index: 5;">8</span>
-            <span id="digitd9" class="digitd" style="z-index: 4;">9</span>
-            <span id="digitd2" class="digitd" style="z-index: 3;">2</span>
-            <span id="digitd0" class="digitd" style="z-index: 2;">0</span>
-            <span id="digitd1" class="digitd" style="z-index: 1;">1</span>
-        </div>
-        <div id="clocke">
-            <span id="digite5" class="digite" style="z-index: 10;">5</span>
-            <span id="digite6" class="digite" style="z-index: 9;">6</span>
-            <span id="digite7" class="digite" style="z-index: 8;">7</span>
-            <span id="digite4" class="digite" style="z-index: 7;">4</span>
-            <span id="digite3" class="digite" style="z-index: 6;">3</span>
-            <span id="digite8" class="digite" style="z-index: 5;">8</span>
-            <span id="digite9" class="digite" style="z-index: 4;">9</span>
-            <span id="digite2" class="digite" style="z-index: 3;">2</span>
-            <span id="digite0" class="digite" style="z-index: 2;">0</span>
-            <span id="digite1" class="digite" style="z-index: 1;">1</span>
-        </div>
-        <div id="clockf">
-            <span id="digitf5" class="digitf" style="z-index: 10;">5</span>
-            <span id="digitf6" class="digitf" style="z-index: 9;">6</span>
-            <span id="digitf7" class="digitf" style="z-index: 8;">7</span>
-            <span id="digitf4" class="digitf" style="z-index: 7;">4</span>
-            <span id="digitf3" class="digitf" style="z-index: 6;">3</span>
-            <span id="digitf8" class="digitf" style="z-index: 5;">8</span>
-            <span id="digitf9" class="digitf" style="z-index: 4;">9</span>
-            <span id="digitf2" class="digitf" style="z-index: 3;">2</span>
-            <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
-            <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
-        </div>
- 
-        <script>
-            function updateDigitColor(digitClass, timeUnit) {
-                const digits = document.getElementsByClassName(digitClass);
-                for (let i = 0; i < digits.length; i++) {
-                    digits[i].style.color = '#311900';
-                    digits[i].classList.remove('nixiebold');
-                }
-                const element = document.getElementById(`${digitClass}${timeUnit}`);
-                element.style.color = '#fb7c00';
-                element.classList.add('nixiebold');
 
-            }
-
-            function updateTime() {
-                const now = new Date();
-                const hours = now.getHours().toString().padStart(2, '0').split("");
-                const minutes = now.getMinutes().toString().padStart(2, '0').split("");
-                const seconds = now.getSeconds().toString().padStart(2, '0').split("");
-
-                updateDigitColor('digita', hours[0]);
-                updateDigitColor('digitb', hours[1]);
-                updateDigitColor('digitc', minutes[0]);
-                updateDigitColor('digitd', minutes[1]);
-                updateDigitColor('digite', seconds[0]);
-                updateDigitColor('digitf', seconds[1]);
-            }
-
-            setInterval(updateTime, 1000);
-            updateTime();
-        </script>
         <div class="Clock-Wrappera"></div>
         <div class="Clock-Wrapperb"></div>
         <div class="Clock-Wrapperc"></div>
@@ -448,21 +439,85 @@
         <div class="room-Wrappere"></div>
         <div class="room-Wrapperf"></div>
 
+        <div class="digitdota">:</div>
+        <div class="digitdotb">:</div>
+        <div class="digitimer">
+            <p id="timer">00.000</p>
+        </div>
+        <div class="timeRecords">
+            <ul id="timeRecords"></ul>
+        </div>
 
     </div>
-    <div class="digitdota">:</div>
-    <div class="digitdotb">:</div>
+
     <button id="startStopButton" onclick="startStopTimer()"><span style="color:rgb(68, 44, 16)">TIMER</span></button>
     <button id="resetTimer" onclick="resetTimer()"><span style="color:rgb(68, 44, 16)">RESET</span></button>
-    <div class="timeRecords">
-        <ul id="timeRecords"></ul>
-    </div>
-    <div class="digitimer">
-        <p id="timer">00.000</p>
-    </div>
-    <div class="timeRecords">
-        <ul id="timeRecords"></ul>
-    </div>
+
+
+
+    <script>
+        function zoomPage() {
+            // 在页面加载时放大页面
+            document.getElementsByTagName('countdown-Wrapper')[0].style.transform = 'scale(1.25)';
+        }
+
+        function toggleFullScreen() {
+            var elem = document.getElementById("content");
+
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) { /* Firefox */
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { /* Firefox */
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE/Edge */
+                    document.msExitFullscreen();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function updateDigitColor(digitClass, timeUnit) {
+            const digits = document.getElementsByClassName(digitClass);
+            for (let i = 0; i < digits.length; i++) {
+                digits[i].style.color = '#311900';
+                digits[i].classList.remove('nixiebold');
+            }
+            const element = document.getElementById(`${digitClass}${timeUnit}`);
+            element.style.color = '#fb7c00';
+            element.classList.add('nixiebold');
+
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0').split("");
+            const minutes = now.getMinutes().toString().padStart(2, '0').split("");
+            const seconds = now.getSeconds().toString().padStart(2, '0').split("");
+
+            updateDigitColor('digita', hours[0]);
+            updateDigitColor('digitb', hours[1]);
+            updateDigitColor('digitc', minutes[0]);
+            updateDigitColor('digitd', minutes[1]);
+            updateDigitColor('digite', seconds[0]);
+            updateDigitColor('digitf', seconds[1]);
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
 
     <script>
         document.body.onkeyup = function (e) {
