@@ -73,6 +73,25 @@
             line-height: 1.5em;
         }
 
+        .currenttime {
+            position: absolute;
+            top: 25vh;
+            width: 80vh;
+            /* 添加宽度以便可以居中对齐 */
+            height: 50vh;
+            background-color: transparent;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            /* 水平居中对齐 */
+            align-items: center;
+            /* 垂直居中对齐 */
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+            font-size: 9vh;
+        }
+
+
         .room-Wrappera,
         .room-Wrapperb,
         .room-Wrapperc,
@@ -124,7 +143,7 @@
         #nixieclock {
             position: absolute;
             top: 51.5vh;
-            left:0vh;
+            left: 0vh;
             vertical-align: middle;
             font-size: 26vh;
             display: flex;
@@ -336,6 +355,11 @@
 <body>
     <button id="brightnessButton"><span style="color:#834100;">lighter</span></button>
     <button id="fullscreenbutt" onclick="toggleFullScreen()"><span style="color: #fb7c00">fullsreen</span></button>
+    <div class="currenttime ">
+        <iframe src="szclock.html"
+            style="position:absolute; top:35vh; width:100%; height:50%; background-color:transparent;border:none;"
+            allowtransparency="true"></iframe>
+    </div>
     <script>
         const button = document.getElementById('brightnessButton');
         let brightness = 1; // 初始亮度为 100%
