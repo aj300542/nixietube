@@ -6,6 +6,96 @@
     <script src="script/wakelock.js"></script>
     <link rel="shortcut icon" href="nixie.ico">
     <style>
+        #div1 {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            width: 20vh;
+            height: 10vh;
+            padding: 5vh;
+            border: 0px solid #aaaaaa;
+            transform: translate(-260%, 60%);
+            z-index: 999;
+        }
+
+        #tip {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            width: 20vh;
+            height: 10vh;
+            padding: 5vh;
+            border: 1px solid #740097;
+            z-index: 99;
+            transform: translate(-260%, 60%);
+        }
+
+        #content {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/display_d.png');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+        }
+
+        #content::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.1);
+            /* 半透明的颜色层 */
+            backdrop-filter: blur(2px);
+            /* 模糊滤镜 */
+        }
+
+        .no-blur::after {
+            backdrop-filter: none;
+        }
+    </style>
+    <script>
+        var images = ['img/display_a.png', 'img/display_a.jpg', 'img/display_b.jpg', 'img/display_c.jpg', 'img/display_e.jpg', 'img/display_f.png', 'img/display_g.jpg', 'img/display_h.png', 'img/display_i.jpg', 'img/display_j.png', 'img/display_k.jpg', 'img/display_l.png', 'img/display_m.png', 'img/display_n.jpg', 'img/display_o.jpg'];
+        var index = 0;
+        var shouldUpdateBackground = true; // 新增的全局变量
+        setInterval(function () {
+            if (shouldUpdateBackground) { // 检查是否应该更新背景
+                var bgImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + images[index] + ')';
+                document.getElementById('content').style.backgroundImage = bgImage;
+                index = (index + 1) % images.length;
+            }
+        }, 10000); 
+    </script>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var file = ev.dataTransfer.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                var content = document.getElementById("content");
+                content.style.backgroundImage =
+                    "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" + reader.result + ")";
+                content.style.backgroundSize = "cover";
+                shouldUpdateBackground = false; // 当图片被拖拽到 div1 时，停止更新背景
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    <style>
         /* 添加一个按钮用于调整亮度 */
         #brightnessButton,
         #fullscreenbutt {
@@ -88,7 +178,7 @@
             /* 垂直居中对齐 */
             letter-spacing: 0.5em;
             line-height: 1.5em;
-            font-size: 9vh;
+            font-size: 6vh;
         }
 
 
@@ -100,7 +190,7 @@
         .room-Wrapperf {
             position: absolute;
             top: 37vh;
-            border: 3px solid #1f0019;
+            border: 4px solid #1f0019;
             border-radius: 16px;
             height: 21.5vh;
             width: 12.5vh;
@@ -117,15 +207,15 @@
         }
 
         .room-Wrappera {
-            left: 20vw;
+            left: 15vw;
         }
 
         .room-Wrapperb {
-            left: 31vw;
+            left: 27vw;
         }
 
         .room-Wrapperc {
-            left: 42vw;
+            left: 40vw;
         }
 
         .room-Wrapperd {
@@ -133,11 +223,11 @@
         }
 
         .room-Wrappere {
-            left: 64vw;
+            left: 66vw;
         }
 
         .room-Wrapperf {
-            left: 75vw;
+            left: 78vw;
         }
 
         #nixieclock {
@@ -145,8 +235,9 @@
             top: 51.5vh;
             left: 0vh;
             vertical-align: middle;
-            font-size: 26vh;
+            font-size: 25vh;
             display: flex;
+            letter-spacing: 0.5em;
             justify-content: space-between;
         }
 
@@ -157,32 +248,32 @@
         .Clock-Wrappere,
         .Clock-Wrapperf {
             position: absolute;
-            top: 37vh;
-            border: 3px solid #1f0019;
+            top: 35.5vh;
+            border: 1px solid #1f0019;
             border-radius: 16px;
-            height: 22.3vh;
-            width: 12.5vh;
+            height: 25.3vh;
+            width: 15.5vh;
             background-color: transparent;
             line-height: 2vh;
             box-shadow: 4px 4px 1px 0px rgba(104, 0, 117, 0.1) inset;
             vertical-align: middle;
             background-image: url('svg/polygon.svg');
             background-size: 40vh 20vh;
-            z-index: 9999;
+            z-index: 19;
             display: flex;
             justify-content: space-between;
         }
 
         .Clock-Wrappera {
-            left: 20vw;
+            left: 15vw;
         }
 
         .Clock-Wrapperb {
-            left: 31vw;
+            left: 27vw;
         }
 
         .Clock-Wrapperc {
-            left: 42vw;
+            left: 40vw;
         }
 
         .Clock-Wrapperd {
@@ -190,11 +281,11 @@
         }
 
         .Clock-Wrappere {
-            left: 64vw;
+            left: 66vw;
         }
 
         .Clock-Wrapperf {
-            left: 75vw;
+            left: 78vw;
         }
 
         /* #clock {
@@ -227,6 +318,9 @@
             font-family: 'Nixiebold-bold';
         }
 
+        .nixieslim {
+            font-family: 'Nixiebold-slim';
+        }
 
 
 
@@ -245,11 +339,11 @@
         }
 
         .digitdota {
-            left: 35.5vw;
+            left: 33.5vw;
         }
 
         .digitdotb {
-            left: 57.5vw;
+            left: 59.5vw;
         }
 
         .digita,
@@ -267,27 +361,27 @@
 
 
         .digita {
-            left: 20vw;
+            left: 16vw;
         }
 
         .digitb {
-            left: 31vw;
+            left: 28vw;
         }
 
         .digitc {
-            left: 42vw;
+            left: 41vw;
         }
 
         .digitd {
-            left: 53vw;
+            left: 54vw;
         }
 
         .digite {
-            left: 64vw;
+            left: 67vw;
         }
 
         .digitf {
-            left: 75vw;
+            left: 79vw;
         }
     </style>
     <style>
@@ -313,7 +407,7 @@
             background-color: #000000;
             color: #fb7c00;
             cursor: pointer;
-            z-index: 2;
+            z-index: 99;
         }
 
         #resetTimer {
@@ -324,7 +418,7 @@
             background-color: #000000;
             color: #fb7c00;
             cursor: pointer;
-            z-index: 2;
+            z-index: 99;
         }
 
         .timeRecords {
@@ -352,9 +446,10 @@
     </style>
 </head>
 
-<body>
+<body ondrop="drop(event)" ondragover="allowDrop(event)">
     <button id="brightnessButton"><span style="color:#834100;">lighter</span></button>
     <button id="fullscreenbutt" onclick="toggleFullScreen()"><span style="color: #fb7c00">fullsreen</span></button>
+    <div id="tip">drop your picture here</div>
     <div class="currenttime ">
         <iframe src="szclock.html"
             style="position:absolute; top:35vh; width:100%; height:50%; background-color:transparent;border:none;"
@@ -373,7 +468,10 @@
     <a href="https://aj300542.github.io/">
         <button id="aboutme"><span style="color:rgb(68, 44, 16)">aj300</span></button>
     </a>
+    <button id="startStopButton" onclick="startStopTimer()"><span style="color:rgb(68, 44, 16)">TIMER</span></button>
+    <button id="resetTimer" onclick="resetTimer()"><span style="color:rgb(68, 44, 16)">RESET</span></button>
     <div id="content">
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div id="nixieclock">
             <div id="clocka">
                 <span id="digita5" class="digita" style="z-index: 10;">5</span>
@@ -472,10 +570,10 @@
             <ul id="timeRecords"></ul>
         </div>
 
+
+
     </div>
 
-    <button id="startStopButton" onclick="startStopTimer()"><span style="color:rgb(68, 44, 16)">TIMER</span></button>
-    <button id="resetTimer" onclick="resetTimer()"><span style="color:rgb(68, 44, 16)">RESET</span></button>
 
 
 
@@ -498,6 +596,7 @@
                 } else if (elem.msRequestFullscreen) { /* IE/Edge */
                     elem.msRequestFullscreen();
                 }
+                elem.style.filter = `brightness(${brightness})`;
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
@@ -508,6 +607,7 @@
                 } else if (document.msExitFullscreen) { /* IE/Edge */
                     document.msExitFullscreen();
                 }
+                document.body.style.filter = `brightness(${brightness})`;
             }
         }
     </script>
@@ -517,12 +617,17 @@
             const digits = document.getElementsByClassName(digitClass);
             for (let i = 0; i < digits.length; i++) {
                 digits[i].style.color = '#311900';
-                digits[i].classList.remove('nixiebold');
+                digits[i].classList.remove('nixieslim');
+                digits[i].style.webkitTextStroke = "";  // 移除描边
+                digits[i].style.mixBlendMode = "";  // 移除混合模式
+                digits[i].style.textShadow = "";  // 移除阴影
             }
             const element = document.getElementById(`${digitClass}${timeUnit}`);
             element.style.color = '#fb7c00';
-            element.classList.add('nixiebold');
-
+            element.classList.add('nixieslim');
+            element.style.webkitTextStroke = "1px #ffffff";  // 添加描边
+            element.style.mixBlendMode = "screen";  // 添加混合模式
+            element.style.textShadow = "0 0 5px #fb7c00, 0 0 10px #fb7c00, 0 0 15px #ff0000, 0 0 20px #fb7c00, 0 0 25px #fb7c00, 0 0 30px #fb7c00, 0 0 35px #ffffff";  // 添加阴影
         }
 
         function updateTime() {
