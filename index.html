@@ -440,7 +440,7 @@
         }
 
         .digitdota {
-            left: 33.5vw;
+            left: 34vw;
         }
 
         .digitdotb {
@@ -521,6 +521,24 @@
             cursor: pointer;
             z-index: 99;
         }
+        #countdown,
+        #timecalculator{
+            position: absolute;
+            top: 85vh;
+            padding: 0.5vh;
+            background-color: #000000;
+            color: #fb7c00;
+            cursor: pointer;
+            z-index: 99;
+        }
+        #countdown{
+            left: 29vw;
+        }
+
+        #timecalculator{
+            left: 37vw;
+        }
+
 
         .timeRecords {
             position: absolute;
@@ -567,9 +585,15 @@
         });
     </script>
     <a href="https://aj300542.github.io/">
-        <button id="aboutme"><span style="color:rgb(68, 44, 16)">aj300</span></button>
+        <button id="aboutme"><span style="color:#fb7c00">aj300</span></button>
     </a>
-    <button id="startStopButton" onclick="startStopTimer()"><span style="color:rgb(68, 44, 16)">TIMER</span></button>
+    <a href="countdown.html">
+        <button id="countdown"  title="A new countdown begins, a new goal, new expectations"><span style="color:#fb7c00">Countdown</span></button>
+    </a>
+    <a href="timecalculator.html">
+        <button id="timecalculator"  title="Remember the time of meeting"><span style="color:#fb7c00">Timecalculator</span></button>
+    </a>
+    <button id="startStopButton" onclick="startStopTimer()" ><span style="color:rgb(68, 44, 16)">TIMER</span></button>
     <button id="resetTimer" onclick="resetTimer()"><span style="color:rgb(68, 44, 16)">RESET</span></button>
     <div id="content">
         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>

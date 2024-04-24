@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Countdown</title>
+    <script src="js/wakelock.js"></script>
+    <link rel="shortcut icon" href="nixie.ico">
+    <style>
+        #div1 {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            width: 20vh;
+            height: 10vh;
+            padding: 5vh;
+            border: 0px solid #aaaaaa;
+            z-index: 999999;
+            transform: translate(-260%, 20%);
+            z-index: 49;
+        }
+
+        #tip {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            width: 20vh;
+            height: 10vh;
+            padding: 5vh;
+            border: 1px solid #740097;
+            z-index: 49;
+            transform: translate(-260%, 20%);
+        }
+
+        #content {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/display_d.png');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #content::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.1);
+            /* 半透明的颜色层 */
+            backdrop-filter: blur(0px);
+            /* 模糊滤镜 */
+        }
+
+        .no-blur::after {
+            backdrop-filter: none;
+        }
+    </style>
+    <script>
+        var images = ['img/display_a.png', 'img/display_a.jpg', 'img/display_b.jpg', 'img/display_c.jpg', 'img/display_e.jpg', 'img/display_f.png', 'img/display_g.jpg', 'img/display_h.png', 'img/display_i.jpg', 'img/display_j.png', 'img/display_k.jpg', 'img/display_l.png', 'img/display_m.png', 'img/display_n.jpg', 'img/display_o.jpg'];
+        var index = 0;
+        var shouldUpdateBackground = true; // 新增的全局变量
+        setInterval(function () {
+            if (shouldUpdateBackground) { // 检查是否应该更新背景
+                var bgImage = 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + images[index] + ')';
+                document.getElementById('content').style.backgroundImage = bgImage;
+                index = (index + 1) % images.length;
+            }
+        }, 30000); 
+    </script>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var file = ev.dataTransfer.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                var content = document.getElementById("content");
+                content.style.backgroundImage =
+                    "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" + reader.result + ")";
+                content.style.backgroundSize = "cover";
+                shouldUpdateBackground = false; // 当图片被拖拽到 div1 时，停止更新背景
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Nixiebold-bold';
+            src: url('fonts/Nixiebold-bold.woff2') format('woff2'),
+                url('fonts/Nixiebold-bold.woff') format('woff'),
+                url('fonts/Nixiebold-bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Nixiebold-mini';
+            src: url('fonts/Nixiebold-mini.woff2') format('woff2'),
+                url('fonts/Nixiebold-mini.woff') format('woff'),
+                url('fonts/Nixiebold-mini.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Nixiebold-slim';
+            src: url('fonts/Nixiebold-slim.woff2') format('woff2'),
+                url('fonts/Nixiebold-slim.woff') format('woff'),
+                url('fonts/Nixiebold-slim.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Nixiebold-boldbig';
+            src: url('fonts/Nixiebold-boldbig.ttf') format('woff2'),
+                url('fonts/Nixiebold-boldbig.woff') format('woff'),
+                url('fonts/Nixiebold-boldbig.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            color: #fb7c00;
+            font-family: 'Nixiebold-boldbig', Arial, sans-serif;
+            line-height: 2vh;
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+        }
+
+        input {
+            color: #fb7c00;
+            background-color: transparent;
+            font-size: 3vh;
+            z-index: 99;
+        }
+
+        input[type="number"] {
+            width: 3ch;
+        }
+
+        #year {
+            width: 5ch;
+        }
+
+        .countdown-Wrapper,
+        .countdownaWrapper,
+        .time-Wrapper,
+        .timeunit-Wrapper,
+        .input-Wrapper,
+        .countdownday {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent;
+            line-height: 2vh;
+            vertical-align: middle;
+            z-index: 0;
+            display: flex;
+            align-content: center;
+            justify-content: space-between;
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+        }
+
+        .countdown-Wrapper {
+            top: 72vh;
+            font-size: 3vh;
+            letter-spacing: 0.25em;
+            font-family: 'Nixiebold-boldbig', Arial, sans-serif;
+            font-family: 'Nixiebold-slim', Arial, sans-serif;
+            text-shadow:
+                0 0 5px #fb7c00,
+                0 0 10px #fb7c00,
+                0 0 15px #fb7c00,
+                0 0 20px #fb7c00,
+                0 0 25px #fb7c00,
+                0 0 30px #fb7c00,
+                0 0 35px #fb7c00;
+            mix-blend-mode: screen;
+            -webkit-text-stroke: 1px #fb7c00;
+        }
+
+        .countdownday {
+            top: 42vh;
+            font-size: 10vh;
+            vertical-align: top;
+            letter-spacing: 0.25em;
+            font-family: 'Nixiebold-slim', Arial, sans-serif;
+            text-shadow:
+                0 0 5px #fb7c00,
+                0 0 10px #fb7c00,
+                0 0 150px #ffffff,
+                0 0 15px #ff0000,
+                0 0 10px #fb7c00,
+                0 0 300px #ffffff,
+                0 0 25px #ff7300,
+                0 0 10px #fb7c00,
+                0 0 35px #ffffff;
+            mix-blend-mode: screen;
+            -webkit-text-stroke: 1px #ffffff;
+
+        }
+
+        .time-Wrapper {
+            top: 60vh;
+            font-size: 3.5vh;
+            font-family: 'Nixiebold-bold', Arial, sans-serif;
+            text-shadow:
+                0 0 5px #fb7c00,
+                0 0 10px #fb7c00,
+                0 0 150px #ffffff,
+                0 0 15px #ff0000,
+                0 0 10px #fb7c00,
+                0 0 300px #ffffff,
+                0 0 25px #ff7300,
+                0 0 10px #fb7c00,
+                0 0 35px #ffffff;
+            mix-blend-mode: screen;
+            -webkit-text-stroke: 1px #fb7c00;
+        }
+
+        .timeunit-Wrapper {
+            top: 65vh;
+            letter-spacing: 2.5em;
+            font-size: 2vh;
+            color: #9b9b9b;
+            z-index: 98;
+        }
+
+        .input-Wrapper {
+            height: 3vh;
+            top: 78.5vh;
+            font-size: 3vh;
+            z-index: 99;
+        }
+
+        .countdownlist {
+            position: absolute;
+            top: 83vh;
+            letter-spacing: 0.5em;
+            font-size: 2vh;
+            font-family: Arial, sans-serif;
+            z-index: 99;
+        }
+
+        .Clock-mesh {
+            position: absolute;
+            top: 53.5vh;
+            left: 44vh;
+            border: 0px solid #1f0019;
+            border-radius: 16px;
+            height: 28vh;
+            width: 100vh;
+            background-color: transparent;
+            line-height: 2vh;
+            box-shadow: 4px 4px 1px 0px rgba(104, 0, 117, 0.1) inset;
+            vertical-align: middle;
+            background-image: url('svg/hexagon.svg');
+            background-size: 10vh 12vh;
+            z-index: 9999;
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        #startCountdown,
+
+        #resetCountdown,
+        #fullscreenbutt,
+        #homebutton {
+            position: absolute;
+            left: 71.5vw;
+            padding: 1vh;
+            background-color: #000000;
+            color: #fb7c00;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #startCountdown {
+            top: 76.5vh;
+        }
+
+        #resetCountdown {
+            top: 76.5vh;
+            left: 78vw;
+        }
+
+        #fullscreenbutt {
+            top: 76.5vh;
+            left: 82vw;
+        }
+        #homebutton {
+            top: 76.5vh;
+            left: 25vw;
+        }
+    </style>
+    <style>
+        #aboutme {
+            position: fixed;
+            top: 79.8vh;
+            left: 1vh;
+            font-size: 1.5vh;
+            padding: 1vh;
+            background-color: #000000;
+            color: #fb7c00;
+            cursor: pointer;
+            z-index: 888;
+        }
+
+        #countdownDatapass {
+            color: #929292;
+            padding: 1vh;
+            font-size: 2vh;
+        }
+
+
+        .currenttime {
+            position: absolute;
+            top: -25vh;
+            width: 80vh;
+            /* 添加宽度以便可以居中对齐 */
+            height: 50vh;
+            background-color: transparent;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            /* 水平居中对齐 */
+            align-items: center;
+            /* 垂直居中对齐 */
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+            font-size: 9vh;
+            z-index: 9;
+        }
+    </style>
+
+</head>
+
+
+<body ondrop="drop(event)" ondragover="allowDrop(event)">
+    <a href="https://aj300542.github.io/">
+        <button id="aboutme"><span style="color:#fb7c00">aj300</span></button>
+    </a>
+    <a href="index.html">
+        <button id="homebutton"><span style="color:#fb7c00">Back to home</span></button>
+    </a>
+    <div id="tip">drop your picture here</div>
+    <div class="currenttime ">
+        <iframe src="szclock.html"
+            style="position:absolute; top:35vh; width:100%; height:50%; background-color:transparent;border:none;"
+            allowtransparency="true"></iframe>
+    </div>
+    <div id="content">
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="Clock-mesh"></div>
+        <div class="countdown-Wrapper">
+            <ul id="countdown-Wrapper">
+                <h1 id="countdown">0000000000.000</h1>
+            </ul>
+
+        </div>
+        <div class="time-Wrapper">
+            <ul id="time-Wrapper">
+                <h2 id="time">000-00-00-00:00:00</h2>
+            </ul>
+
+        </div>
+        <div class="countdownday">
+            <p><span style="font-size: 3vh;">totalDays:</span></p>
+
+            <ul id="countdownday">
+                <h1 id="totalDays">00000</h1>
+            </ul>
+
+        </div>
+
+
+    </div>
+    </div>
+    <div class="input-Wrapper">
+        past
+        <input type="number" id="year" min="2024" max="3050" step="1">-
+        <input type="number" id="month" min="1" max="12" step="1">-
+        <input type="number" id="day" min="1" max="31" step="1">-
+        <input type="number" id="hour" min="0" max="23" step="1"><span class="custom-font">:</span>
+        <input type="number" id="minute" min="0" max="59" step="1"><span class="custom-font">:</span>
+        <input type="number" id="second" min="0" max="59" step="1">
+    </div>
+
+    <button id="startCountdown" onclick="startCountdown()"><span style="color: #fb7c00">Timecalculator</span></button>
+    <button id="resetCountdown" onclick="resetCountdown()"><span style="color: #fb7c00">reset</span></button>
+    <button id="fullscreenbutt" onclick="toggleFullScreen()"><span style="color: #fb7c00">fullsreen</span></button>
+    <div class="countdownlist">
+        <div id="countdownDatapass"></div>
+    </div>
+
+
+
+    <div class="timeunit-Wrapper">
+        y m d h m s
+    </div>
+
+
+
+    <script>
+        function zoomPage() {
+            // 在页面加载时放大页面
+            document.getElementsByTagName('countdown-Wrapper')[0].style.transform = 'scale(1.25)';
+        }
+
+        function toggleFullScreen() {
+            var elem = document.getElementById("content");
+
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) { /* Firefox */
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { /* Firefox */
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE/Edge */
+                    document.msExitFullscreen();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        var countdownfunction;
+        var updateSeconds;
+        var updateMinutes;
+        var countdownDatapass = [];
+
+        window.onload = function () {
+            // Load countdown data from localStorage
+            var storedData = localStorage.getItem('countdownDatapass');
+            if (storedData) {
+                countdownDatapass = JSON.parse(storedData);
+            }
+            displayCountdownDatapass();
+        }
+
+        function startCountdown() {
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("month").value;
+            var day = document.getElementById("day").value;
+            var hour = document.getElementById("hour").value;
+            var minute = document.getElementById("minute").value;
+            var second = document.getElementById("second").value;
+            var inputDate = new Date(year, month - 1, day, hour, minute, second);
+            var now = new Date();
+
+            if (inputDate >= now) {
+                document.getElementById("countdown").innerHTML = "ERROR";
+                return;
+            }
+
+            if (countdownfunction) {
+                clearInterval(countdownfunction);
+                countdownfunction = null;
+                clearInterval(updateSeconds);
+                clearInterval(updateMinutes);
+                return;
+            }
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("month").value;
+            var day = document.getElementById("day").value;
+            var hour = document.getElementById("hour").value;
+            var minute = document.getElementById("minute").value;
+            var second = document.getElementById("second").value;
+            var pastDate = new Date(year, month - 1, day, hour, minute, second);
+
+            // Store countdown data to localStorage
+            if (countdownDatapass.length >= 5) {
+                countdownDatapass.shift();
+            }
+            countdownDatapass.push({ year, month, day, hour, minute, second });
+            saveData();
+            displayCountdownDatapass();
+
+            countdownfunction = setInterval(function () {
+                var now = new Date();
+
+                // Calculate the difference in seconds
+                var diffInSeconds = Math.floor((now.getTime() - pastDate.getTime()) / 1000);
+                var diffInMilliseconds = now.getTime() - pastDate.getTime();
+
+                let secondsStr = String(Math.floor(diffInMilliseconds / 1000)).padStart(10, '0');
+
+                let millisecondsStr = String(diffInMilliseconds % 1000).padStart(3, '0');
+
+                // 找到第一个非零数字的位置
+                let firstNonZeroIndex = secondsStr.split('').findIndex(char => char !== '0');
+
+                // 将前面的零设置为黑色
+                let coloredSeconds = `<span style="color:black">${secondsStr.substring(0, firstNonZeroIndex)}</span>${secondsStr.substring(firstNonZeroIndex)}`;
+
+                document.getElementById("countdown").innerHTML = coloredSeconds + '.' + millisecondsStr;
+
+                // Calculate the time difference
+                var diff = new Date(now.getTime() - pastDate.getTime());
+                var diffYears = diff.getUTCFullYear() - 1970;
+                var diffMonths = diff.getUTCMonth();
+                var diffDays = diff.getUTCDate() - 1;
+                var diffHours = diff.getUTCHours();
+                var diffMinutes = diff.getUTCMinutes();
+                var diffSeconds = diff.getUTCSeconds();
+
+                var totalDays = Math.floor(diffInSeconds / (24 * 60 * 60));
+
+                document.getElementById("time").innerHTML = String(diffYears).padStart(3, '0') + "-" + String(diffMonths).padStart(2, '0') + "-" + String(diffDays).padStart(2, '0') + "-" + String(diffHours).padStart(2, '0') + ":" + String(diffMinutes).padStart(2, '0') + ":" + String(diffSeconds).padStart(2, '0');
+                document.getElementById("totalDays").innerHTML = totalDays;
+            }, 1);
+        }
+
+
+        function displayCountdownDatapass() {
+            var countdownDatapassElement = document.getElementById("countdownDatapass");
+            countdownDatapassElement.innerHTML = "";
+            var now = new Date();
+            for (var i = 0; i < countdownDatapass.length; i++) {
+                (function () {
+                    var data = countdownDatapass[i];
+                    var countdownItem = document.createElement("div");
+                    var countdownName = document.createElement("span");
+                    countdownName.textContent = "data" + (i + 1);
+                    countdownItem.appendChild(countdownName);
+                    countdownItem.innerHTML += "：";
+                    countdownItem.innerHTML += data.year != now.getFullYear() ? "<span style='color:#fb7c00;'>" + data.year.toString().padStart(4, '0') + "</span>" : data.year.toString().padStart(4, '0');
+                    countdownItem.innerHTML += "-";
+                    countdownItem.innerHTML += data.month != (now.getMonth() + 1).toString().padStart(2, '0') ? "<span style='color:#fb7c00;'>" + data.month.padStart(2, '0') + "</span>" : data.month.padStart(2, '0');
+                    countdownItem.innerHTML += "-";
+                    countdownItem.innerHTML += data.day != now.getDate().toString().padStart(2, '0') ? "<span style='color:#fb7c00;'>" + data.day.padStart(2, '0') + "</span>" : data.day.padStart(2, '0');
+                    countdownItem.innerHTML += "-";
+                    countdownItem.innerHTML += data.hour != now.getHours().toString().padStart(2, '0') ? "<span style='color:#fb7c00;'>" + data.hour.padStart(2, '0') + "</span>" : data.hour.padStart(2, '0');
+                    countdownItem.innerHTML += ":";
+                    countdownItem.innerHTML += data.minute != now.getMinutes().toString().padStart(2, '0') ? "<span style='color:#fb7c00;'>" + data.minute.padStart(2, '0') + "</span>" : data.minute.padStart(2, '0');
+                    countdownItem.innerHTML += "";
+                    countdownItem.addEventListener("click", function () {
+                        document.getElementById("year").value = data.year;
+                        document.getElementById("month").value = data.month;
+                        document.getElementById("day").value = data.day;
+                        document.getElementById("hour").value = data.hour;
+                        document.getElementById("minute").value = data.minute;
+                        // Change the text color when clicked
+                        this.style.color = "#fb7c00";
+                        startCountdown();
+                    });
+                    countdownDatapassElement.appendChild(countdownItem);
+                })();
+            }
+        }
+
+
+
+        function saveData() {
+            // 遍历 countdownDatapass 数组
+            for (var i = 0; i < countdownDatapass.length; i++) {
+                // 删除每个数据项的秒钟部分
+                delete countdownDatapass[i].second;
+            }
+            // 移除重复的数据
+            removeDuplicates();
+            // 将更新后的数据保存到 localStorage
+            localStorage.setItem('countdownDatapass', JSON.stringify(countdownDatapass));
+        }
+
+        function addData(newData) {
+            // 遍历 countdownDatapass 数组
+            for (var i = 0; i < countdownDatapass.length; i++) {
+                // 检查是否存在相同的数据
+                if (JSON.stringify(countdownDatapass[i]) === JSON.stringify(newData)) {
+                    // 如果找到相同的数据，就返回，不添加新数据
+                    return;
+                }
+            }
+            // 如果没有找到相同的数据，就添加新数据
+            countdownDatapass.push(newData);
+            // 将更新后的数据保存到 localStorage
+            localStorage.setItem('countdownDatapass', JSON.stringify(countdownDatapass));
+        }
+
+        function removeDuplicates() {
+            // 创建一个新的 Set
+            var uniqueData = new Set();
+            // 遍历 countdownDatapass 数组
+            for (var i = 0; i < countdownDatapass.length; i++) {
+                // 将每个数据项转换为字符串，并添加到 Set 中
+                uniqueData.add(JSON.stringify(countdownDatapass[i]));
+            }
+            // 将 Set 转换回数组，并将每个数据项转换回对象
+            countdownDatapass = Array.from(uniqueData).map(JSON.parse);
+            // 将更新后的数据保存到 localStorage
+            localStorage.setItem('countdownDatapass', JSON.stringify(countdownDatapass));
+        }
+
+
+
+
+
+        function resetCountdown() {
+            if (countdownfunction) {
+                clearInterval(countdownfunction);
+                countdownfunction = null;
+            }
+            if (updateSeconds) {
+                clearInterval(updateSeconds);
+            }
+            if (updateMinutes) {
+                clearInterval(updateMinutes);
+            }
+            document.getElementById("countdown").innerHTML = "0000000000.000";
+            document.getElementById("time").innerHTML = "000-00-00-00:00:00";
+            updateTime();
+            updateSeconds = setInterval(function () {
+                var now = new Date();
+                document.getElementById("second").value = String(now.getSeconds()).padStart(2, '0');
+            }, 1000); // 每秒更新一次秒数
+            updateMinutes = setInterval(function () {
+                var now = new Date();
+                document.getElementById("minute").value = String(now.getMinutes()).padStart(2, '0');
+            }, 60000); // 每分钟更新一次分钟数
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>
