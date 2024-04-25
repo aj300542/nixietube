@@ -18,7 +18,8 @@
             padding: 5vh;
             border: 0px solid #aaaaaa;
             transform: translate(-260%, 60%);
-            z-index: 999;
+            z-index: 49;
+
         }
 
         #tip {
@@ -32,7 +33,7 @@
             height: 10vh;
             padding: 5vh;
             border: 1px solid #740097;
-            z-index: 99;
+            z-index: 44;
             transform: translate(-260%, 60%);
         }
 
@@ -42,7 +43,6 @@
             background-position: center;
             width: 100%;
             height: 100%;
-            z-index: 11;
         }
 
         #content::after {
@@ -52,7 +52,7 @@
             right: 0;
             bottom: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.15);
             /* 半透明的颜色层 */
             backdrop-filter: blur(2px);
             /* 模糊滤镜 */
@@ -96,32 +96,6 @@
         }
     </script>
     <style>
-        /* 添加一个按钮用于调整亮度 */
-        #brightnessButton,
-        #fullscreenbutt {
-            position: fixed;
-            top: 90vh;
-            right: 1vh;
-            padding: 1vh;
-            background-color: #000000;
-            color: #fff;
-            cursor: pointer;
-            z-index: 88;
-        }
-
-        #brightnessButton {
-
-            right: 1vh;
-
-        }
-
-        #fullscreenbutt {
-
-            right: 8vh;
-
-        }
-    </style>
-    <style>
         @font-face {
             font-family: 'Nixiebold-bold';
             src: url('fonts/Nixiebold-bold.woff2') format('woff2'),
@@ -149,6 +123,15 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'Nixiebold-boldbig';
+            src: url('fonts/Nixiebold-boldbig.ttf') format('woff2'),
+                url('fonts/Nixiebold-boldbig.woff') format('woff'),
+                url('fonts/Nixiebold-boldbig.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         ::-webkit-scrollbar {
             display: none;
         }
@@ -158,17 +141,33 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: rgb(0, 0, 0);
+            background-color: transparent;
             color: #fb7c00;
+            font-family: 'Nixiebold-bold', Arial, sans-serif;
+            line-height: 2vh;
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+        }
+
+        .nixieclock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 100vh;
+            background-color: transparent;
+            color: #fb7c00;
+            font-size: 25vh;
             font-family: 'Nixiebold-mini', Arial, sans-serif;
             line-height: 2vh;
-            letter-spacing: 0.4em;
+            letter-spacing: 0.5em;
             line-height: 1.5em;
+            z-index: 11;
         }
 
         .currenttime {
             position: absolute;
-            top: 25vh;
+            top: -25vh;
             width: 80vh;
             /* 添加宽度以便可以居中对齐 */
             height: 50vh;
@@ -181,10 +180,124 @@
             /* 垂直居中对齐 */
             letter-spacing: 0.5em;
             line-height: 1.5em;
-            font-size: 6vh;
-            z-index: 88;
+            font-size: 9vh;
+            z-index: 99;
         }
 
+        .nixiebold {
+            font-family: 'Nixiebold-bold';
+        }
+
+        .nixieslim {
+            font-family: 'Nixiebold-slim';
+        }
+
+        .digitdota,
+        .digitdotb {
+            position: absolute;
+            top: 50vh;
+            font-size: 26vh;
+            width: 100vw;
+            display: flex;
+            line-height: 2vh;
+            justify-content: space-between;
+            color: rgb(251, 124, 0);
+            font-family: 'Nixiebold-mini', Arial, sans-serif;
+            z-index: 99;
+        }
+
+        .digitdota {
+            left: 34vw;
+        }
+
+        .digitdotb {
+            left: 59.5vw;
+        }
+
+        .digita,
+        .digitb,
+        .digitc,
+        .digitd,
+        .digite,
+        .digitf {
+            position: absolute;
+            top: 33vh;
+            color: black;
+            display: flex;
+            width: 100%;
+            text-align: space-between;
+        }
+
+        .digita {
+            left: 16vw;
+        }
+
+        .digitb {
+            left: 28vw;
+        }
+
+        .digitc {
+            left: 41vw;
+        }
+
+        .digitd {
+            left: 54vw;
+        }
+
+        .digite {
+            left: 67vw;
+        }
+
+        .digitf {
+            left: 79vw;
+        }
+
+        .Clock-Wrappera,
+        .Clock-Wrapperb,
+        .Clock-Wrapperc,
+        .Clock-Wrapperd,
+        .Clock-Wrappere,
+        .Clock-Wrapperf {
+            position: absolute;
+            top: 35.5vh;
+            border: 1px solid #1f0019;
+            border-radius: 16px;
+            height: 24.3vh;
+            width: 15.5vh;
+            background-color: transparent;
+            line-height: 2vh;
+            box-shadow: 0px 3px 5px 0px rgba(104, 0, 117, 0.1) inset;
+            vertical-align: middle;
+            background-image: url('svg/hexagonop05.svg');
+            background-size: 18vh 20vh;
+            z-index: 19;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .Clock-Wrappera {
+            left: 15vw;
+        }
+
+        .Clock-Wrapperb {
+            left: 27vw;
+        }
+
+        .Clock-Wrapperc {
+            left: 40vw;
+        }
+
+        .Clock-Wrapperd {
+            left: 53vw;
+        }
+
+        .Clock-Wrappere {
+            left: 66vw;
+        }
+
+        .Clock-Wrapperf {
+            left: 78vw;
+        }
 
         .room-Wrappera,
         .room-Wrapperb,
@@ -205,10 +318,10 @@
             background-image: url('svg/room.svg');
             background-size: 110vh 110vh;
             background-position: 1vh 3.5vh;
-            z-index: -1;
             display: flex;
             justify-content: space-between;
             backdrop-filter: blur(8px);
+
         }
 
         .room-Wrappera {
@@ -242,7 +355,7 @@
         .docke,
         .dockf {
             position: absolute;
-            top: 61.5vh;
+            top: 62vh;
             border: 2px solid #1f0019;
             border-radius: 6px;
             height: 3.3vh;
@@ -252,7 +365,7 @@
             background-image: url('svg/hexagonop.svg');
             background-size: 25vh 80vh;
             background-position: 0.25vh 3.1vh;
-            z-index: 99;
+            z-index: 19;
             display: flex;
             justify-content: space-between;
             backdrop-filter: blur(4px);
@@ -300,10 +413,8 @@
             background-image: url('svg/dock.svg');
             background-size: 160vh 40vh;
             background-position: 0.5vh -0.5vh;
-            z-index: 0;
             display: flex;
             justify-content: space-between;
-            backdrop-filter: blur(4px);
             backdrop-filter: blur(4px);
             filter:
                 drop-shadow(0 0 2px #fb0000) drop-shadow(0 0 5px #ff9100);
@@ -344,147 +455,6 @@
             letter-spacing: 0.5em;
             justify-content: space-between;
         }
-
-        .Clock-Wrappera,
-        .Clock-Wrapperb,
-        .Clock-Wrapperc,
-        .Clock-Wrapperd,
-        .Clock-Wrappere,
-        .Clock-Wrapperf {
-            position: absolute;
-            top: 35.5vh;
-            border: 1px solid #1f0019;
-            border-radius: 16px;
-            height: 24.3vh;
-            width: 15.5vh;
-            background-color: transparent;
-            line-height: 2vh;
-            box-shadow: 1px 1px 1px 0px rgba(104, 0, 117, 0.1) inset;
-            vertical-align: middle;
-            background-image: url('svg/hexagonop05.svg');
-            background-size: 18vh 20vh;
-            z-index: 19;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .Clock-Wrappera {
-            left: 15vw;
-        }
-
-        .Clock-Wrapperb {
-            left: 27vw;
-        }
-
-        .Clock-Wrapperc {
-            left: 40vw;
-        }
-
-        .Clock-Wrapperd {
-            left: 53vw;
-        }
-
-        .Clock-Wrappere {
-            left: 66vw;
-        }
-
-        .Clock-Wrapperf {
-            left: 78vw;
-        }
-
-        /* #clock {
-             text-shadow: 0 0 5px #fb7c00, 0 0 10px #c900fb, 0 0 15px #fb7c00, 0 0 20px #ffd0a1;  /* 这里添加了发光效果 */
-
-
-
-
-        @font-face {
-            font-family: 'DSEG07Modern';
-            src: url('fonts/DSEG7Modern-Light.woff2') format('woff2'),
-                url('fonts/DSEG7Modern-Light.woff') format('woff'),
-                url('fonts/DSEG7Modern-Light.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'DSEG7ModernMini';
-            src: url('fonts/DSEG7ModernMini-Light.woff2') format('woff2'),
-                url('fonts/DSEG7ModernMini-Light.woff') format('woff'),
-                url('fonts/DSEG7ModernMini-Light.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        .nixiebold {
-            font-family: 'Nixiebold-bold';
-        }
-
-        .nixieslim {
-            font-family: 'Nixiebold-slim';
-        }
-
-
-
-        .digitdota,
-        .digitdotb {
-            position: absolute;
-            top: 50vh;
-            font-size: 26vh;
-            width: 100vw;
-            display: flex;
-            line-height: 2vh;
-            justify-content: space-between;
-            color: rgb(251, 124, 0);
-            font-family: 'Nixiebold-mini', Arial, sans-serif;
-            z-index: 99;
-        }
-
-        .digitdota {
-            left: 34vw;
-        }
-
-        .digitdotb {
-            left: 59.5vw;
-        }
-
-        .digita,
-        .digitb,
-        .digitc,
-        .digitd,
-        .digite,
-        .digitf {
-            position: absolute;
-            color: black;
-            display: flex;
-            width: 100%;
-            text-align: space-between;
-        }
-
-
-        .digita {
-            left: 16vw;
-        }
-
-        .digitb {
-            left: 28vw;
-        }
-
-        .digitc {
-            left: 41vw;
-        }
-
-        .digitd {
-            left: 54vw;
-        }
-
-        .digite {
-            left: 67vw;
-        }
-
-        .digitf {
-            left: 79vw;
-        }
     </style>
     <style>
         .digitimer {
@@ -523,11 +493,16 @@
             z-index: 99;
         }
 
+        #aboutme,
+        #brightnessButton,
+        #fullscreenbutt,
         #countdown,
-        #timecalculator {
+        #timecalculator,
+        #meshdisplay{
             position: absolute;
-            top: 85vh;
-            padding: 0.5vh;
+            top: 85.5vh;
+            padding: 1vh;
+            font-size: 1.5vh;
             background-color: #000000;
             color: #fb7c00;
             cursor: pointer;
@@ -535,13 +510,28 @@
         }
 
         #countdown {
-            left: 29vw;
+            left: 27vw;
         }
 
         #timecalculator {
-            left: 37vw;
+            left: 34vw;
         }
 
+        #fullscreenbutt {
+            right: 8vw;
+        }
+
+        #brightnessButton {
+            right: 1vw;
+        }
+        #meshdisplay{
+            top: 90.5vh;
+            right: 1vw;
+        }
+
+        #clockmesh {
+            display: block;
+        }
 
         .timeRecords {
             position: absolute;
@@ -553,22 +543,11 @@
             z-index: 1;
         }
     </style>
-    <style>
-        #aboutme {
-            position: fixed;
-            top: 90vh;
-            left: 1vh;
-            font-size: 1.5vh;
-            padding: 1vh;
-            background-color: #000000;
-            color: #222222;
-            cursor: pointer;
-            z-index: 888;
-        }
-    </style>
+
 </head>
 
 <body ondrop="drop(event)" ondragover="allowDrop(event)">
+    <button id="meshdisplay">clockmesh</button>
     <button id="brightnessButton"><span style="color:#834100;">lighter</span></button>
     <button id="fullscreenbutt" onclick="toggleFullScreen()"><span style="color: #fb7c00">fullsreen</span></button>
     <div id="tip">drop your picture here</div>
@@ -602,7 +581,7 @@
     <button id="resetTimer" onclick="resetTimer()"><span style="color:rgb(68, 44, 16)">RESET</span></button>
     <div id="content">
         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id="nixieclock">
+        <div class="nixieclock">
             <div id="clocka">
                 <span id="digita5" class="digita" style="z-index: 10;">5</span>
                 <span id="digita6" class="digita" style="z-index: 9;">6</span>
@@ -676,13 +655,13 @@
                 <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
             </div>
         </div>
-
-        <div class="Clock-Wrappera"></div>
-        <div class="Clock-Wrapperb"></div>
-        <div class="Clock-Wrapperc"></div>
-        <div class="Clock-Wrapperd"></div>
-        <div class="Clock-Wrappere"></div>
-        <div class="Clock-Wrapperf"></div>
+        <div id="clockmesh">
+            <div class="Clock-Wrappera"></div>
+            <div class="Clock-Wrapperb"></div>
+            <div class="Clock-Wrapperc"></div>
+            <div class="Clock-Wrapperd"></div>
+            <div class="Clock-Wrappere"></div>
+            <div class="Clock-Wrapperf"></div>
 
         <div class="room-Wrappera"></div>
         <div class="room-Wrapperb"></div>
@@ -704,23 +683,27 @@
         <div class="dockdd"></div>
         <div class="dockde"></div>
         <div class="dockdf"></div>
-
-
+    </div>
         <div class="digitdota">:</div>
         <div class="digitdotb">:</div>
         <div class="digitimer">
-            <p id="timer">00.000</p>
+            <p id="timer">0.000</p>
         </div>
         <div class="timeRecords">
             <ul id="timeRecords"></ul>
         </div>
 
-
-
     </div>
-
-
-
+    <script>
+        document.getElementById('meshdisplay').addEventListener('click', function () {
+            var clockmesh = document.getElementById('clockmesh');
+            if (clockmesh.style.display === 'none') {
+                clockmesh.style.display = 'block';
+            } else {
+                clockmesh.style.display = 'none';
+            }
+        });
+    </script>
 
     <script>
         function zoomPage() {
