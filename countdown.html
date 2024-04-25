@@ -58,6 +58,7 @@
             backdrop-filter: blur(0px);
             /* 模糊滤镜 */
         }
+
         .no-blur::after {
             backdrop-filter: none;
         }
@@ -211,7 +212,7 @@
             font-size: 3.5vh;
             font-family: 'Nixiebold-slim', Arial, sans-serif;
             text-shadow:
-            0 0 5px #fb7c00,
+                0 0 5px #fb7c00,
                 0 0 10px #fb7c00,
                 0 0 150px #ffffff,
                 0 0 15px #ff0000,
@@ -379,6 +380,7 @@
             top: 76.5vh;
             left: 83vw;
         }
+
         #homebutton {
             top: 76.5vh;
             left: 23vw;
@@ -561,6 +563,7 @@
             var minute = document.getElementById("minute").value;
             var second = document.getElementById("second").value;
             var countDownDate = new Date(year, month - 1, day, hour, minute, second).getTime();
+            var audio = new Audio('mp3/bird2.mp3'); // 创建一个新的Audio对象
 
             if (countdownData.length >= 5) {
                 countdownData.shift();
@@ -606,6 +609,11 @@
                     clearInterval(countdownfunction);
                     document.getElementById("countdown").innerHTML = "NOW";
                     document.getElementById("time").innerHTML = "000-00-00-00:00:00";
+                    audio.play(); // 播放音频
+                    // 添加事件监听器
+                    window.addEventListener('keydown', function () {
+                        audio.pause(); // 停止播放音频
+                    });
                 }
             }, 1);
         }
