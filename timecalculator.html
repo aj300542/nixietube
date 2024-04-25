@@ -269,19 +269,19 @@
 
         .Clock-mesh {
             position: absolute;
-            top: 53.5vh;
-            left: 44vh;
+            top: 67vh;
+            left: 60.5vh;
             border: 0px solid #1f0019;
             border-radius: 16px;
-            height: 28vh;
-            width: 100vh;
+            height: 8vh;
+            width: 82vh;
             background-color: transparent;
             line-height: 2vh;
             box-shadow: 4px 4px 1px 0px rgba(104, 0, 117, 0.1) inset;
             vertical-align: middle;
-            background-image: url('svg/hexagon.svg');
+            background-image: url('svg/hexagonop05.svg');
             background-size: 10vh 12vh;
-            z-index: 9999;
+            z-index: 999;
             display: flex;
             justify-content: space-between;
         }
@@ -314,6 +314,7 @@
             top: 76.5vh;
             left: 82vw;
         }
+
         #homebutton {
             top: 76.5vh;
             left: 25vw;
@@ -336,6 +337,11 @@
             color: #929292;
             padding: 1vh;
             font-size: 2vh;
+        }
+
+        #countdown:before {
+            content: '0000000000';
+            visibility: hidden;
         }
 
 
@@ -404,7 +410,7 @@
     </div>
     <div class="input-Wrapper">
         past
-        <input type="number" id="year" min="2024" max="3050" step="1">-
+        <input type="number" id="year" min="-5000" max="5000" step="1">-
         <input type="number" id="month" min="1" max="12" step="1">-
         <input type="number" id="day" min="1" max="31" step="1">-
         <input type="number" id="hour" min="0" max="23" step="1"><span class="custom-font">:</span>
@@ -473,6 +479,23 @@
                 countdownDatapass = JSON.parse(storedData);
             }
             displayCountdownDatapass();
+
+            // Get current date and time
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1; // JavaScript months are 0-11
+            var day = now.getDate();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+
+            // Set the input fields
+            document.getElementById("year").value = year;
+            document.getElementById("month").value = month;
+            document.getElementById("day").value = day;
+            document.getElementById("hour").value = hour;
+            document.getElementById("minute").value = minute;
+            document.getElementById("second").value = second;
         }
 
         function startCountdown() {
@@ -527,10 +550,13 @@
                 // 找到第一个非零数字的位置
                 let firstNonZeroIndex = secondsStr.split('').findIndex(char => char !== '0');
 
-                // 将前面的零设置为黑色
-                let coloredSeconds = `<span style="color:black">${secondsStr.substring(0, firstNonZeroIndex)}</span>${secondsStr.substring(firstNonZeroIndex)}`;
+                // 设置前导零的可见性
+                document.getElementById("countdown").style.setProperty('--zero-count', firstNonZeroIndex);
 
-                document.getElementById("countdown").innerHTML = coloredSeconds + '.' + millisecondsStr;
+                // 设置倒计时的值
+                document.getElementById("countdown").innerHTML = secondsStr.substring(firstNonZeroIndex) + '.' + millisecondsStr;
+
+
 
                 // Calculate the time difference
                 var diff = new Date(now.getTime() - pastDate.getTime());
