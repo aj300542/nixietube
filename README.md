@@ -1,7 +1,4 @@
 # Nixie tube Clock.
-Press F11 enter and exit full screen mode.
-Befor I made a nixie clock webpage with my own nixie tube picture.
-
 
 #这个网页特别设计了一套手工数字字体家族，包括Nixiebold、Nixiemini、Nixieslim和Nixieregular，无需图片即可无缝运行。
 为了模仿Nixie电子管的显示效果，我遵循了Nixie数字的独特顺序：5 6 7 4 3 8 9 2 0 1，并在数字前面添加了网格，以实现真实的感觉。
