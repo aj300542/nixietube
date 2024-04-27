@@ -17,8 +17,6 @@
             width: 20vh;
             height: 10vh;
             padding: 5vh;
-            border: 0px solid #aaaaaa;
-            transform: translate(-260%, 60%);
             z-index: 49;
 
         }
@@ -39,7 +37,7 @@
         }
 
         #content {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/display_d.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/display_d.png');
             background-size: cover;
             background-position: center;
             width: 100%;
@@ -53,9 +51,9 @@
             right: 0;
             bottom: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.1);
             /* 半透明的颜色层 */
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(3px);
             /* 模糊滤镜 */
         }
 
@@ -156,7 +154,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: transparent;
+            background-color: #000000;
             color: #fb7c00;
             font-family: 'Nixiebold-bold', Arial, sans-serif;
             line-height: 2vh;
@@ -285,7 +283,7 @@
         .Clock-Wrapperf {
             position: absolute;
             top: 35.5vh;
-            border: 1px solid #1f0019;
+            border: 0px solid #1f0019;
             border-radius: 16px;
             height: 24.3vh;
             width: 15.5vh;
@@ -381,7 +379,7 @@
         .dockf {
             position: absolute;
             top: 62vh;
-            border: 2px solid #1f0019;
+            border: 0px solid #1f0019;
             border-radius: 6px;
             height: 3.3vh;
             width: 15.5vh;
@@ -394,7 +392,7 @@
             display: flex;
             justify-content: space-between;
             backdrop-filter: blur(4px);
-            box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.7);
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
         }
 
         .docka {
@@ -579,8 +577,8 @@
     <button id="fullscreenbutt" onclick="toggleFullScreen()"><span style="color: #fb7c00">fullsreen</span></button>
     <div id="tip">drop your picture here</div>
     <div class="currenttime ">
-        <iframe src="szclock.html"
-            style="position:absolute; top:35vh; width:100%; height:50%; background-color:transparent;border:none;"
+        <iframe src="szclockcolor.html"
+            style="position:absolute; top:25vh; width:100%; height:100%; background-color:transparent;border:none;"
             allowtransparency="true"></iframe>
     </div>
     <script>
