@@ -279,13 +279,13 @@
         }
 
         .Clock-mesh {
-            position: relative;
-            top: 53vh;
-            left: 46vh;
+            position: absolute;
+            top: 75vh;
+            left: 0vh;
             border: 0px solid #000000;
             border-radius: 16px;
             height: 22vh;
-            width: 90vh;
+            width: 200vh;
             background-color: transparent;
             line-height: 2vh;
             box-shadow: 4px 4px 1px 0px rgba(104, 0, 117, 0.1) inset;
@@ -297,7 +297,7 @@
             justify-content: center;
             /* 水平居中 */
             align-items: center;
-            /* 垂直居中 */
+            z-index: 6;
         }
 
 
@@ -466,9 +466,10 @@
                 <h2 id="time">000-00-00-00:00:00</h2>
             </ul>
         </div>
-        <div class="Clock-mesh"></div>
+
 
     </div>
+    <div class="Clock-mesh"></div>
     <div class="input-Wrapper">
         future
         <input type="number" id="year" min="2024" max="3050" step="1">-
