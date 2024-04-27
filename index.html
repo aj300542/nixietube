@@ -132,6 +132,20 @@
             font-style: normal;
         }
 
+        @keyframes blink {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
         ::-webkit-scrollbar {
             display: none;
         }
@@ -189,7 +203,17 @@
         }
 
         .nixieslim {
+
+            background: linear-gradient(45deg, #ff9900, #ff00cc);
+            -webkit-background-clip: text;
+            color: transparent;
             font-family: 'Nixiebold-slim';
+        }
+
+        .clockz {
+            animation: blink 0s infinite;
+            /* 应用闪烁动画 */
+            z-index: 1;
         }
 
         .digitdota,
@@ -498,7 +522,7 @@
         #fullscreenbutt,
         #countdown,
         #timecalculator,
-        #meshdisplay{
+        #meshdisplay {
             position: absolute;
             top: 85.5vh;
             padding: 1vh;
@@ -524,7 +548,8 @@
         #brightnessButton {
             right: 1vw;
         }
-        #meshdisplay{
+
+        #meshdisplay {
             top: 90.5vh;
             right: 1vw;
         }
@@ -642,7 +667,7 @@
                 <span id="digite0" class="digite" style="z-index: 2;">0</span>
                 <span id="digite1" class="digite" style="z-index: 1;">1</span>
             </div>
-            <div id="clockf">
+            <div class="clockf">
                 <span id="digitf5" class="digitf" style="z-index: 10;">5</span>
                 <span id="digitf6" class="digitf" style="z-index: 9;">6</span>
                 <span id="digitf7" class="digitf" style="z-index: 8;">7</span>
@@ -663,27 +688,27 @@
             <div class="Clock-Wrappere"></div>
             <div class="Clock-Wrapperf"></div>
 
-        <div class="room-Wrappera"></div>
-        <div class="room-Wrapperb"></div>
-        <div class="room-Wrapperc"></div>
-        <div class="room-Wrapperd"></div>
-        <div class="room-Wrappere"></div>
-        <div class="room-Wrapperf"></div>
+            <div class="room-Wrappera"></div>
+            <div class="room-Wrapperb"></div>
+            <div class="room-Wrapperc"></div>
+            <div class="room-Wrapperd"></div>
+            <div class="room-Wrappere"></div>
+            <div class="room-Wrapperf"></div>
 
-        <div class="docka"></div>
-        <div class="dockb"></div>
-        <div class="dockc"></div>
-        <div class="dockd"></div>
-        <div class="docke"></div>
-        <div class="dockf"></div>
+            <div class="docka"></div>
+            <div class="dockb"></div>
+            <div class="dockc"></div>
+            <div class="dockd"></div>
+            <div class="docke"></div>
+            <div class="dockf"></div>
 
-        <div class="dockda"></div>
-        <div class="dockdb"></div>
-        <div class="dockdc"></div>
-        <div class="dockdd"></div>
-        <div class="dockde"></div>
-        <div class="dockdf"></div>
-    </div>
+            <div class="dockda"></div>
+            <div class="dockdb"></div>
+            <div class="dockdc"></div>
+            <div class="dockdd"></div>
+            <div class="dockde"></div>
+            <div class="dockdf"></div>
+        </div>
         <div class="digitdota">:</div>
         <div class="digitdotb">:</div>
         <div class="digitimer">
@@ -695,6 +720,9 @@
 
     </div>
     <script>
+        window.onload = function () {
+            clockmesh.style.display = 'none'
+        }
         document.getElementById('meshdisplay').addEventListener('click', function () {
             var clockmesh = document.getElementById('clockmesh');
             if (clockmesh.style.display === 'none') {
@@ -704,6 +732,8 @@
             }
         });
     </script>
+
+
 
     <script>
         function zoomPage() {
@@ -746,6 +776,7 @@
             for (let i = 0; i < digits.length; i++) {
                 digits[i].style.color = '#311900';
                 digits[i].classList.remove('nixieslim');
+                digits[i].classList.remove('clockz');
                 digits[i].style.webkitTextStroke = "";  // 移除描边
                 digits[i].style.mixBlendMode = "";  // 移除混合模式
                 digits[i].style.textShadow = "";  // 移除阴影
@@ -753,6 +784,7 @@
             const element = document.getElementById(`${digitClass}${timeUnit}`);
             element.style.color = '#fb7c00';
             element.classList.add('nixieslim');
+            element.classList.add('clockz');
             element.style.webkitTextStroke = "1px #ffffff";  // 添加描边
             element.style.mixBlendMode = "screen";  // 添加混合模式
             element.style.textShadow = "0 0 5px #fb7c00, 0 0 10px #fb7c00, 0 0 15px #ff0000, 0 0 20px #fb7c00, 0 0 25px #fb7c00, 0 0 30px #fb7c00, 0 0 35px #ffffff";  // 添加阴影
