@@ -170,7 +170,8 @@
         .time-Wrapper,
         .timeunit-Wrapper,
         .input-Wrapper,
-        .countdownday {
+        .countdownday,
+        .countdowndaycolor {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -195,11 +196,13 @@
             text-shadow:
                 0 0 5px #fb7c00,
                 0 0 10px #fb7c00,
-                0 0 15px #fb7c00,
-                0 0 20px #fb7c00,
-                0 0 25px #fb7c00,
-                0 0 30px #fb7c00,
-                0 0 35px #fb7c00;
+                0 0 150px #ffffff,
+                0 0 15px #ff0000,
+                0 0 10px #fb7c00,
+                0 0 300px #ffffff,
+                0 0 25px #ff7300,
+                0 0 10px #fb7c00,
+                0 0 35px #ffffff;
             mix-blend-mode: screen;
             -webkit-text-stroke: 1px #fb7c00;
         }
@@ -211,19 +214,59 @@
             letter-spacing: 0.25em;
             font-family: 'Nixiebold-slim', Arial, sans-serif;
             text-shadow:
-                0 0 5px #fb7c00,
+                0 0 2px #fb7c00,
+                0 0 3px #fb7c00,
+                0 0 6px #fb7c00,
+                0 0 8px #fb7c00,
                 0 0 10px #fb7c00,
-                0 0 150px #ffffff,
-                0 0 15px #ff0000,
-                0 0 10px #fb7c00,
-                0 0 300px #ffffff,
-                0 0 25px #ff7300,
-                0 0 10px #fb7c00,
-                0 0 35px #ffffff;
+                0 0 12px #fb7c00,
+                0 0 15px #fb7c00;
             mix-blend-mode: screen;
             -webkit-text-stroke: 1px #ffffff;
 
         }
+
+        #countdownday {
+            top: 42vh;
+            font-size: 10vh;
+            vertical-align: top;
+            letter-spacing: 0.25em;
+            color: black;
+            font-family: 'Nixiebold-bold', Arial, sans-serif;
+            text-shadow:
+                0 0 2px #ff002b,
+                0 0 5px #fb7c00;
+            mix-blend-mode: screen;
+            -webkit-text-stroke: 1px #ffffff;
+        }
+
+        .countdowndaycolor {
+            top: 42vh;
+            font-size: 10vh;
+            vertical-align: top;
+            letter-spacing: 0.25em;
+            font-family: 'Nixiebold-slim', Arial, sans-serif;
+
+        }
+
+        #countdowndaycolor {
+            top: 42vh;
+            font-size: 10vh;
+            vertical-align: top;
+            letter-spacing: 0.25em;
+            font-family: 'Nixiebold-slim', Arial, sans-serif;
+            background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animate 1.5s linear infinite;
+        }
+
+        @keyframes animate {
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
 
         .time-Wrapper {
             top: 60vh;
@@ -281,7 +324,7 @@
             vertical-align: middle;
             background-image: url('svg/hexagon.svg');
             background-size: 14vh 17vh;
-            z-index:1;
+            z-index: 1;
             display: flex;
             justify-content: space-between;
         }
@@ -401,6 +444,14 @@
 
             <ul id="countdownday">
                 <h1 id="totalDays">00000</h1>
+            </ul>
+
+        </div>
+        <div class="countdowndaycolor">
+            <p><span style="font-size: 3vh;">totalDays:</span></p>
+
+            <ul id="countdowndaycolor">
+                <h1 id="totalDayscolor">00000</h1>
             </ul>
 
         </div>
@@ -572,6 +623,7 @@
 
                 document.getElementById("time").innerHTML = String(diffYears).padStart(3, '0') + "-" + String(diffMonths).padStart(2, '0') + "-" + String(diffDays).padStart(2, '0') + "-" + String(diffHours).padStart(2, '0') + ":" + String(diffMinutes).padStart(2, '0') + ":" + String(diffSeconds).padStart(2, '0');
                 document.getElementById("totalDays").innerHTML = totalDays;
+                document.getElementById("totalDayscolor").innerHTML = totalDays;
             }, 1);
         }
 
