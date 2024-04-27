@@ -269,19 +269,19 @@
 
         .Clock-mesh {
             position: absolute;
-            top: 67vh;
-            left: 60.5vh;
+            top: 75vh;
+            left: 0vh;
             border: 0px solid #1f0019;
             border-radius: 16px;
-            height: 8vh;
-            width: 82vh;
+            height: 38vh;
+            width: 200vh;
             background-color: transparent;
             line-height: 2vh;
             box-shadow: 4px 4px 1px 0px rgba(104, 0, 117, 0.1) inset;
             vertical-align: middle;
-            background-image: url('svg/hexagonop05.svg');
-            background-size: 10vh 12vh;
-            z-index: 999;
+            background-image: url('svg/hexagon.svg');
+            background-size: 14vh 17vh;
+            z-index:1;
             display: flex;
             justify-content: space-between;
         }
@@ -383,7 +383,7 @@
     </div>
     <div id="content">
         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div class="Clock-mesh"></div>
+
         <div class="countdown-Wrapper">
             <ul id="countdown-Wrapper">
                 <h1 id="countdown">0000000000.000</h1>
@@ -407,7 +407,8 @@
 
 
     </div>
-    </div>
+
+    <div class="Clock-mesh"></div>
     <div class="input-Wrapper">
         past
         <input type="number" id="year" min="-5000" max="5000" step="1">-
