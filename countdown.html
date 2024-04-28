@@ -168,7 +168,7 @@
         .time-Wrapper,
         .timeunit-Wrapper,
         .input-Wrapper,
-        .countdownday {
+        .countdownday{
             position: fixed;
             top: 50%;
             left: 50%;
@@ -210,20 +210,19 @@
         .time-Wrapper {
             top: 58vh;
             font-size: 3.5vh;
-            font-family: 'Nixiebold-slim', Arial, sans-serif;
-            text-shadow:
-                0 0 5px #fb7c00,
-                0 0 10px #fb7c00,
-                0 0 150px #ffffff,
-                0 0 15px #ff0000,
-                0 0 10px #fb7c00,
-                0 0 300px #ffffff,
-                0 0 25px #ff7300,
-                0 0 10px #fb7c00,
-                0 0 35px #ffffff;
-            mix-blend-mode: screen;
-            -webkit-text-stroke: 1px #fb7c00;
+            font-family: 'Nixiebold-boldbig', Arial, sans-serif;
+
+            background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animate 3s linear infinite;
         }
+        @keyframes animate {
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+             
 
         .timeunit-Wrapper {
             top: 62vh;
@@ -466,8 +465,6 @@
                 <h2 id="time">000-00-00-00:00:00</h2>
             </ul>
         </div>
-
-
     </div>
     <div class="Clock-mesh"></div>
     <div class="input-Wrapper">
@@ -500,7 +497,6 @@
     <div class="timeunit-Wrapper">
         <ul id="current-timer">
             <h2 id="time">y m d h m s</h2>
-
         </ul>
     </div>
 
