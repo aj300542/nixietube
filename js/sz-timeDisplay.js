@@ -7,6 +7,7 @@ function szDisplayNumber(id, number) {
         displayNumber = String(number).padStart(2, '0');
     }
     document.getElementById("sz-" + id).innerText = displayNumber;
+    document.getElementById("sc-" + id).innerText = displayNumber;
 }
 
 function szDisplayTime() {
