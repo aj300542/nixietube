@@ -615,6 +615,10 @@
                     window.addEventListener('keydown', function () {
                         audio.pause(); // 停止播放音频
                     });
+                                        // 添加鼠标点击事件监听器到整个文档
+                    document.addEventListener('click', function () {
+                        audio.pause(); // 停止播放音频
+                    });
                 }
             }, 1);
         }
