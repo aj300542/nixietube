@@ -95,6 +95,26 @@
         }
     </script>
     <style>
+
+
+        #parent {
+
+        }
+        #myMovingElement {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1vh;
+            height: 1vh;
+            background-color: rgb(251, 59, 0);
+            border-radius: 50%;
+            /* 将方块变成圆 */
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            /* 使元素居中 */
+        }
+    </style>
+    <style>
         @font-face {
             font-family: 'Nixiebold-bold';
             src: url('fonts/Nixiebold-bold.woff2') format('woff2'),
@@ -606,78 +626,82 @@
     <button id="resetTimer" onclick="resetTimer()"><span style="color:rgb(68, 44, 16)">RESET</span></button>
     <div id="content">
         <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
         <div class="nixieclock">
-            <div id="clocka">
-                <span id="digita5" class="digita" style="z-index: 10;">5</span>
-                <span id="digita6" class="digita" style="z-index: 9;">6</span>
-                <span id="digita7" class="digita" style="z-index: 8;">7</span>
-                <span id="digita4" class="digita" style="z-index: 7;">4</span>
-                <span id="digita3" class="digita" style="z-index: 6;">3</span>
-                <span id="digita8" class="digita" style="z-index: 5;">8</span>
-                <span id="digita9" class="digita" style="z-index: 4;">9</span>
-                <span id="digita2" class="digita" style="z-index: 3;">2</span>
-                <span id="digita0" class="digita" style="z-index: 2;">0</span>
-                <span id="digita1" class="digita" style="z-index: 1;">1</span>
-            </div>
-            <div id="clockb">
-                <span id="digitb5" class="digitb" style="z-index: 10;">5</span>
-                <span id="digitb6" class="digitb" style="z-index: 9;">6</span>
-                <span id="digitb7" class="digitb" style="z-index: 8;">7</span>
-                <span id="digitb4" class="digitb" style="z-index: 7;">4</span>
-                <span id="digitb3" class="digitb" style="z-index: 6;">3</span>
-                <span id="digitb8" class="digitb" style="z-index: 5;">8</span>
-                <span id="digitb9" class="digitb" style="z-index: 4;">9</span>
-                <span id="digitb2" class="digitb" style="z-index: 3;">2</span>
-                <span id="digitb0" class="digitb" style="z-index: 2;">0</span>
-                <span id="digitb1" class="digitb" style="z-index: 1;">1</span>
-            </div>
-            <div id="clockc">
-                <span id="digitc5" class="digitc" style="z-index: 10;">5</span>
-                <span id="digitc6" class="digitc" style="z-index: 9;">6</span>
-                <span id="digitc7" class="digitc" style="z-index: 8;">7</span>
-                <span id="digitc4" class="digitc" style="z-index: 7;">4</span>
-                <span id="digitc3" class="digitc" style="z-index: 6;">3</span>
-                <span id="digitc8" class="digitc" style="z-index: 5;">8</span>
-                <span id="digitc9" class="digitc" style="z-index: 4;">9</span>
-                <span id="digitc2" class="digitc" style="z-index: 3;">2</span>
-                <span id="digitc0" class="digitc" style="z-index: 2;">0</span>
-                <span id="digitc1" class="digitc" style="z-index: 1;">1</span>
-            </div>
-            <div id="clockd">
-                <span id="digitd5" class="digitd" style="z-index: 10;">5</span>
-                <span id="digitd6" class="digitd" style="z-index: 9;">6</span>
-                <span id="digitd7" class="digitd" style="z-index: 8;">7</span>
-                <span id="digitd4" class="digitd" style="z-index: 7;">4</span>
-                <span id="digitd3" class="digitd" style="z-index: 6;">3</span>
-                <span id="digitd8" class="digitd" style="z-index: 5;">8</span>
-                <span id="digitd9" class="digitd" style="z-index: 4;">9</span>
-                <span id="digitd2" class="digitd" style="z-index: 3;">2</span>
-                <span id="digitd0" class="digitd" style="z-index: 2;">0</span>
-                <span id="digitd1" class="digitd" style="z-index: 1;">1</span>
-            </div>
-            <div id="clocke">
-                <span id="digite5" class="digite" style="z-index: 10;">5</span>
-                <span id="digite6" class="digite" style="z-index: 9;">6</span>
-                <span id="digite7" class="digite" style="z-index: 8;">7</span>
-                <span id="digite4" class="digite" style="z-index: 7;">4</span>
-                <span id="digite3" class="digite" style="z-index: 6;">3</span>
-                <span id="digite8" class="digite" style="z-index: 5;">8</span>
-                <span id="digite9" class="digite" style="z-index: 4;">9</span>
-                <span id="digite2" class="digite" style="z-index: 3;">2</span>
-                <span id="digite0" class="digite" style="z-index: 2;">0</span>
-                <span id="digite1" class="digite" style="z-index: 1;">1</span>
-            </div>
-            <div class="clockf">
-                <span id="digitf5" class="digitf" style="z-index: 10;">5</span>
-                <span id="digitf6" class="digitf" style="z-index: 9;">6</span>
-                <span id="digitf7" class="digitf" style="z-index: 8;">7</span>
-                <span id="digitf4" class="digitf" style="z-index: 7;">4</span>
-                <span id="digitf3" class="digitf" style="z-index: 6;">3</span>
-                <span id="digitf8" class="digitf" style="z-index: 5;">8</span>
-                <span id="digitf9" class="digitf" style="z-index: 4;">9</span>
-                <span id="digitf2" class="digitf" style="z-index: 3;">2</span>
-                <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
-                <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
+            <div id="parent">
+                <div id="clocka">
+                    <span id="digita5" class="digita" style="z-index: 10;">5</span>
+                    <span id="digita6" class="digita" style="z-index: 9;">6</span>
+                    <span id="digita7" class="digita" style="z-index: 8;">7</span>
+                    <span id="digita4" class="digita" style="z-index: 7;">4</span>
+                    <span id="digita3" class="digita" style="z-index: 6;">3</span>
+                    <span id="digita8" class="digita" style="z-index: 5;">8</span>
+                    <span id="digita9" class="digita" style="z-index: 4;">9</span>
+                    <span id="digita2" class="digita" style="z-index: 3;">2</span>
+                    <span id="digita0" class="digita" style="z-index: 2;">0</span>
+                    <span id="digita1" class="digita" style="z-index: 1;">1</span>
+                </div>
+                <div id="clockb">
+                    <span id="digitb5" class="digitb" style="z-index: 10;">5</span>
+                    <span id="digitb6" class="digitb" style="z-index: 9;">6</span>
+                    <span id="digitb7" class="digitb" style="z-index: 8;">7</span>
+                    <span id="digitb4" class="digitb" style="z-index: 7;">4</span>
+                    <span id="digitb3" class="digitb" style="z-index: 6;">3</span>
+                    <span id="digitb8" class="digitb" style="z-index: 5;">8</span>
+                    <span id="digitb9" class="digitb" style="z-index: 4;">9</span>
+                    <span id="digitb2" class="digitb" style="z-index: 3;">2</span>
+                    <span id="digitb0" class="digitb" style="z-index: 2;">0</span>
+                    <span id="digitb1" class="digitb" style="z-index: 1;">1</span>
+                </div>
+                <div id="clockc">
+                    <span id="digitc5" class="digitc" style="z-index: 10;">5</span>
+                    <span id="digitc6" class="digitc" style="z-index: 9;">6</span>
+                    <span id="digitc7" class="digitc" style="z-index: 8;">7</span>
+                    <span id="digitc4" class="digitc" style="z-index: 7;">4</span>
+                    <span id="digitc3" class="digitc" style="z-index: 6;">3</span>
+                    <span id="digitc8" class="digitc" style="z-index: 5;">8</span>
+                    <span id="digitc9" class="digitc" style="z-index: 4;">9</span>
+                    <span id="digitc2" class="digitc" style="z-index: 3;">2</span>
+                    <span id="digitc0" class="digitc" style="z-index: 2;">0</span>
+                    <span id="digitc1" class="digitc" style="z-index: 1;">1</span>
+                </div>
+                <div id="clockd">
+                    <span id="digitd5" class="digitd" style="z-index: 10;">5</span>
+                    <span id="digitd6" class="digitd" style="z-index: 9;">6</span>
+                    <span id="digitd7" class="digitd" style="z-index: 8;">7</span>
+                    <span id="digitd4" class="digitd" style="z-index: 7;">4</span>
+                    <span id="digitd3" class="digitd" style="z-index: 6;">3</span>
+                    <span id="digitd8" class="digitd" style="z-index: 5;">8</span>
+                    <span id="digitd9" class="digitd" style="z-index: 4;">9</span>
+                    <span id="digitd2" class="digitd" style="z-index: 3;">2</span>
+                    <span id="digitd0" class="digitd" style="z-index: 2;">0</span>
+                    <span id="digitd1" class="digitd" style="z-index: 1;">1</span>
+                </div>
+                <div id="clocke">
+                    <span id="digite5" class="digite" style="z-index: 10;">5</span>
+                    <span id="digite6" class="digite" style="z-index: 9;">6</span>
+                    <span id="digite7" class="digite" style="z-index: 8;">7</span>
+                    <span id="digite4" class="digite" style="z-index: 7;">4</span>
+                    <span id="digite3" class="digite" style="z-index: 6;">3</span>
+                    <span id="digite8" class="digite" style="z-index: 5;">8</span>
+                    <span id="digite9" class="digite" style="z-index: 4;">9</span>
+                    <span id="digite2" class="digite" style="z-index: 3;">2</span>
+                    <span id="digite0" class="digite" style="z-index: 2;">0</span>
+                    <span id="digite1" class="digite" style="z-index: 1;">1</span>
+                </div>
+                <div class="clockf">
+                    <span id="digitf5" class="digitf" style="z-index: 10;">5</span>
+                    <span id="digitf6" class="digitf" style="z-index: 9;">6</span>
+                    <span id="digitf7" class="digitf" style="z-index: 8;">7</span>
+                    <span id="digitf4" class="digitf" style="z-index: 7;">4</span>
+                    <span id="digitf3" class="digitf" style="z-index: 6;">3</span>
+                    <span id="digitf8" class="digitf" style="z-index: 5;">8</span>
+                    <span id="digitf9" class="digitf" style="z-index: 4;">9</span>
+                    <span id="digitf2" class="digitf" style="z-index: 3;">2</span>
+                    <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
+                    <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
+                </div>
+                <div id="myMovingElement"></div>
             </div>
         </div>
         <div id="clockmesh">
@@ -757,6 +781,19 @@
                 clockmesh.style.display = 'none';
             }
         });
+    </script>
+    <script>
+        var angle = 0;
+        var box = document.getElementById("myMovingElement");
+        var interval = 20;  /* 时间间隔 */
+        var increment = 180 / (2 * 1000 / interval);  /* angle每次增加的量 */
+        setInterval(swing, interval);
+
+        function swing() {
+            angle += increment;
+            var left = 50 + 25 * Math.sin(angle * Math.PI / 180);  /* 使元素像钟摆一样左右移动 */
+            box.style.left = left + "%";
+        }
     </script>
 
 
