@@ -97,19 +97,7 @@
     <style>
         #parent {}
 
-        #myMovingElement {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0.5vh;
-            height: 0.5vh;
-            background-color: rgb(251, 59, 0);
-            border-radius: 50%;
-            /* 将方块变成圆 */
-            mix-blend-mode: screen;
-            transform: translate(-50%, -50%);
-            /* 使元素居中 */
-        }
+
     </style>
     <style>
         @font-face {
@@ -710,7 +698,7 @@
                     <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
                     <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
                 </div>
-                <div id="myMovingElement"></div>
+
             </div>
         </div>
         <div id="clockmesh">
@@ -791,19 +779,7 @@
             }
         });
     </script>
-    <script>
-        var angle = 0;
-        var box = document.getElementById("myMovingElement");
-        var interval = 20;  /* 时间间隔 */
-        var increment = 180 / (2 * 1000 / interval);  /* angle每次增加的量 */
-        setInterval(swing, interval);
 
-        function swing() {
-            angle += increment;
-            var left = 50 + 25 * Math.sin(angle * Math.PI / 180);  /* 使元素像钟摆一样左右移动 */
-            box.style.left = left + "%";
-        }
-    </script>
 
 
 

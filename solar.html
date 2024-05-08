@@ -3,6 +3,15 @@
 
 <head>
     <style>
+        @font-face {
+            font-family: 'Nixiebold-bold';
+            src: url('fonts/Nixiebold-bold.woff2') format('woff2'),
+                url('fonts/Nixiebold-bold.woff') format('woff'),
+                url('fonts/Nixiebold-bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             display: flex;
             justify-content: center;
@@ -12,11 +21,30 @@
             color: #fb7c00;
             font-family: 'Nixiebold-bold', Arial, sans-serif;
             line-height: 2vh;
-            letter-spacing: 0.5em;
+            letter-spacing: 0.15em;
             line-height: 1.5em;
+            font-family: 'Nixiebold-bold', Arial, sans-serif;
+            font-size: 4vh;
+
         }
+
         :root {
-            --base-speed: 10s;  /* 定义全局变量 */
+            --base-speed: 10s;
+            /* 定义全局变量 */
+        }
+
+        #myMovingElement {
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            width: 0.5vh;
+            height: 0.5vh;
+            background-color: rgb(251, 59, 0);
+            border-radius: 50%;
+            /* 将方块变成圆 */
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            /* 使元素居中 */
         }
 
         .sun {
@@ -28,6 +56,26 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+        }
+
+        .orbitceres {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            animation: rotation 1000s infinite linear;
+            transform-origin: 0vw 0vh;
+        }
+
+        .orbitceres {
+            animation-duration: calc(var(--base-speed) * 4.6);
+        }
+
+        #ceres {
+            margin-left: -15vw;
+            background-color: brown;
+            width: 0.25vw;
+            height: 0.25vw;
+            border-radius: 50%;
         }
 
         .orbit,
@@ -48,7 +96,8 @@
 
 
         .orbitmercury {
-            animation-duration: calc(var(--base-speed) * 0.24);;
+            animation-duration: calc(var(--base-speed) * 0.24);
+            ;
         }
 
         .orbitvenus {
@@ -100,7 +149,7 @@
         }
 
         #venus {
-            margin-left: -7.5vw;
+            margin-left: 7.5vw;
 
             background-color: gold;
             width: 0.87vw;
@@ -118,7 +167,7 @@
         }
 
         #mars {
-            margin-left: -12.5vw;
+            margin-left: 12.5vw;
 
             background-color: red;
             width: 0.49vw;
@@ -132,7 +181,7 @@
             width: 5.28vw;
             height: 5.28vw;
             border-radius: 50%;
-            background: linear-gradient(orange, #c06c4b, orange, #ffe4c3,#ff4800,orange, #ff733b, orange, #ffe4c3);
+            background: linear-gradient(orange, #c06c4b, orange, #ffe4c3, #ff4800, orange, #ff733b, orange, #ffe4c3);
             opacity: 0.64;
             position: relative;
         }
@@ -162,9 +211,9 @@
 
         #saturn {
             position: relative;
-            margin-left: -25vw;
+            margin-left: 25vw;
             opacity: 0.64;
-            background: linear-gradient(gold, #fff59e, gold, #ffab45,gold, #fff59e);
+            background: linear-gradient(gold, #fff59e, gold, #ffab45, gold, #fff59e);
             width: 3.67vw;
             height: 3.67vw;
             border-radius: 50%;
@@ -181,7 +230,7 @@
         }
 
         #saturn::before {
-            
+
             width: 150%;
             /* 调整这个值来改变土星环的宽度 */
             height: 20%;
@@ -213,7 +262,7 @@
         }
 
         #neptune {
-            margin-left: -30vw;
+            margin-left: 30vw;
 
             background-color: darkblue;
             width: 1.57vw;
@@ -231,6 +280,53 @@
             }
         }
     </style>
+    <style>
+        .firework {
+            position: absolute;
+            width: 4vh;
+            height: 4vh;
+            border-radius: 50%;
+            background: linear-gradient(gold, #fff59e, gold, #ffab45, gold, #fff59e);
+            animation: explode 1s ease-out;
+            mix-blend-mode: screen;
+            opacity: 0.34;
+        }
+
+        @keyframes explode {
+            from {
+                transform: scale(0);
+                transform: rotate(1200deg);
+            }
+
+            to {
+                transform: scale(2);
+                transform: rotate(-2700deg);
+            }
+        }
+
+        .firework:before,
+        .firework:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 4vh;
+            height: 4vh;
+            background: linear-gradient(orange, #c06c4b, orange, #ffe4c3, #ff4800, orange, #ff733b, orange, #ffe4c3);
+            animation: explode 1s ease-out;
+            opacity: 0.64;
+        }
+
+        .firework:before {
+            transform: rotate(1200deg);
+
+        }
+
+        .firework:after {
+
+            transform: rotate(-2700deg);
+        }
+    </style>
+
 </head>
 
 <body>
@@ -277,8 +373,75 @@
                 <div class="planet"></div>
             </div>
         </div>
+        <div class="orbitceres">
+            <div id="ceres">
+                <div class="planet"></div>
+            </div>
+        </div>
     </div>
-    </div>
+    <div id="myMovingElement"></div>
+    <div id="counter">0</div>
+    <script>
+        var angle = 0;
+        var box = document.getElementById("myMovingElement");
+        var interval = 20;  /* 时间间隔 */
+        var increment = 180 / (2 * 1000 / interval);  /* angle每次增加的量 */
+        setInterval(swing, interval);
+
+        function swing() {
+            angle += increment;
+            var left = 50 + 25 * Math.sin(angle * Math.PI / 180);  /* 使元素像钟摆一样左右移动 */
+            box.style.left = left + "%";
+        }
+    </script>
+    <script>
+        var counter = 0;
+        var counterElement = document.getElementById('counter');
+
+        function collisionDetected(element1, element2) {
+            var rect1 = element1.getBoundingClientRect();
+            var rect2 = element2.getBoundingClientRect();
+
+            return !(rect1.right < rect2.left ||
+                rect1.left > rect2.right ||
+                rect1.bottom < rect2.top ||
+                rect1.top > rect2.bottom);
+        }
+
+        function createFirework(element) {
+            var firework = document.createElement('div');
+            firework.className = 'firework';
+            var rect = element.getBoundingClientRect();
+            firework.style.left = rect.left + 'px';
+            firework.style.top = rect.top + 'px';
+            document.body.appendChild(firework);
+
+            setTimeout(function () {
+                firework.style.transform = 'scale(0)';
+            }, 0);
+
+            setTimeout(function () {
+                firework.style.transform = 'scale(1)';
+            }, 500);
+
+            setTimeout(function () {
+                document.body.removeChild(firework);
+            }, 1000);
+        }
+
+        var planets = ['#mercury', '#venus', '#earth', '#mars', '#jupiter', '#saturn', '#uranus', '#neptune'];
+        setInterval(function () {
+            for (var i = 0; i < planets.length; i++) {
+                var planet = document.querySelector(planets[i]);
+                if (planet && collisionDetected(box, planet)) {
+                    createFirework(planet);
+                    counter++;
+                    counterElement.textContent = counter;
+                }
+            }
+        }, interval);
+    </script>
+
 </body>
 
 </html>
