@@ -96,8 +96,6 @@
     </script>
     <style>
         #parent {}
-
-
     </style>
     <style>
         @font-face {
@@ -167,12 +165,24 @@
             line-height: 1.5em;
         }
 
-        .nixieclock {
+        .nixieclock,
+        #clockmesh,
+        #clockmesh1,
+        #clockmesh2,
+        #clockmesh3,
+        #clockmesh4 {
+            flex: 1;
+            /* 让所有时钟均匀分布 */
+            position: absolute;
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
+            /* 可用 space-between 或 space-evenly */
             align-items: center;
-            flex-wrap: wrap;
-            height: 100vh;
+            width: 85%;
+            margin: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background-color: transparent;
             color: #fb7c00;
             font-size: 25vh;
@@ -180,7 +190,52 @@
             line-height: 2vh;
             letter-spacing: 0.5em;
             line-height: 1.5em;
+        }
+
+        .nixieclock {
+            top: 47vh;
             z-index: 11;
+        }
+
+        #clockmesh {
+
+            z-index: 12;
+        }
+
+        #clockmesh1,
+        #clockmesh2,
+        #clockmesh3,
+        #clockmesh4 {
+
+            z-index: 10;
+        }
+
+        #clockmesh1 {}
+
+        #clockmesh2 {
+            top: 66vh;
+        }
+
+        #clockmesh3 {
+            z-index: 1;
+            top: 52vh;
+        }
+
+
+        #clockmesh4 {
+            z-index: -0;
+
+        }
+
+        .clockgit,
+        .clock {
+            flex: 1;
+            display: flex;
+            justify-content: space-evenly;
+            /* 让所有时钟均匀分布 */
+            align-items: center;
+            width: 100%;
+            /* 调整容器大小 */
         }
 
         .currenttime {
@@ -226,10 +281,28 @@
             z-index: 1;
         }
 
+        @keyframes breathe {
+            0% {
+                opacity: 1;
+            }
+
+            /* 100% 可见 */
+            50% {
+                opacity: 0.5;
+            }
+
+            /* 半透明，模拟呼吸效果 */
+            100% {
+                opacity: 1;
+            }
+
+            /* 重新变亮 */
+        }
+
         .digitdota,
         .digitdotb {
             position: absolute;
-            top: 50vh;
+            top: 55vh;
             font-size: 26vh;
             width: 100vw;
             display: flex;
@@ -238,6 +311,8 @@
             color: rgb(251, 124, 0);
             font-family: 'Nixiebold-mini', Arial, sans-serif;
             z-index: 99;
+            animation: breathe 2s infinite ease-in-out;
+            /* 让动画持续运行 */
         }
 
         .digitdota {
@@ -245,7 +320,7 @@
         }
 
         .digitdotb {
-            left: 59.25vw;
+            left: 57.25vw;
         }
 
         .digita,
@@ -255,35 +330,16 @@
         .digite,
         .digitf {
             position: absolute;
-            top: 33vh;
             color: black;
+
+        }
+
+        .git {
+            position: relative;
             display: flex;
-            width: 100%;
-            text-align: space-between;
-        }
-
-        .digita {
-            left: 16vw;
-        }
-
-        .digitb {
-            left: 28vw;
-        }
-
-        .digitc {
-            left: 41vw;
-        }
-
-        .digitd {
-            left: 54vw;
-        }
-
-        .digite {
-            left: 67vw;
-        }
-
-        .digitf {
-            left: 79vw;
+            height: 23vh;
+            width: 12.5vh;
+            vertical-align: middle;
         }
 
         .Clock-Wrappera,
@@ -292,45 +348,17 @@
         .Clock-Wrapperd,
         .Clock-Wrappere,
         .Clock-Wrapperf {
-            position: absolute;
-            top: 35.5vh;
+            position: relative;
+            display: flex;
             border: 0px solid #1f0019;
             border-radius: 16px;
-            height: 24.3vh;
-            width: 15.5vh;
-            background-color: transparent;
+            height: 23vh;
+            width: 12.5vh;
             line-height: 2vh;
             box-shadow: 0px 3px 5px 0px rgba(104, 0, 117, 0.1) inset;
-            vertical-align: middle;
             background-image: url('svg/hexagonop05.svg');
             background-size: 18vh 20vh;
-            z-index: 19;
-            display: flex;
-            justify-content: space-between;
-        }
 
-        .Clock-Wrappera {
-            left: 15vw;
-        }
-
-        .Clock-Wrapperb {
-            left: 27vw;
-        }
-
-        .Clock-Wrapperc {
-            left: 40vw;
-        }
-
-        .Clock-Wrapperd {
-            left: 53vw;
-        }
-
-        .Clock-Wrappere {
-            left: 66vw;
-        }
-
-        .Clock-Wrapperf {
-            left: 78vw;
         }
 
         .room-Wrappera,
@@ -339,47 +367,18 @@
         .room-Wrapperd,
         .room-Wrappere,
         .room-Wrapperf {
-            position: absolute;
-            top: 35.5vh;
+            position: relative;
+            display: flex;
             border: 2px solid #1f0019;
             border-radius: 16px;
-            height: 24.3vh;
-            width: 15.5vh;
+            height: 23vh;
+            width: 12.5vh;
             background-color: rgb(0, 0, 0, .5);
             line-height: 2vh;
-            box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.1) inset;
-            vertical-align: middle;
             background-image: url('svg/room.svg');
             background-size: 110vh 110vh;
             background-position: 1vh 3.5vh;
-            display: flex;
-            justify-content: space-between;
-            backdrop-filter: blur(8px);
 
-        }
-
-        .room-Wrappera {
-            left: 15vw;
-        }
-
-        .room-Wrapperb {
-            left: 27vw;
-        }
-
-        .room-Wrapperc {
-            left: 40vw;
-        }
-
-        .room-Wrapperd {
-            left: 53vw;
-        }
-
-        .room-Wrappere {
-            left: 66vw;
-        }
-
-        .room-Wrapperf {
-            left: 78vw;
         }
 
         .docka,
@@ -388,46 +387,17 @@
         .dockd,
         .docke,
         .dockf {
-            position: absolute;
-            top: 62vh;
-            border: 0px solid #1f0019;
-            border-radius: 6px;
+            position: relative;
+            display: flex;
+
             height: 3.3vh;
-            width: 15.5vh;
+            width: 12vh;
             background-image: linear-gradient(to bottom right, rgba(117, 96, 74, 0.2), rgba(56, 16, 16, 0.2));
-            vertical-align: middle;
             background-image: url('svg/hexagonop.svg');
             background-size: 25vh 80vh;
             background-position: 0.25vh 3.1vh;
-            z-index: 19;
-            display: flex;
-            justify-content: space-between;
             backdrop-filter: blur(4px);
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
-        }
-
-        .docka {
-            left: 15vw;
-        }
-
-        .dockb {
-            left: 27vw;
-        }
-
-        .dockc {
-            left: 40vw;
-        }
-
-        .dockd {
-            left: 53vw;
-        }
-
-        .docke {
-            left: 66vw;
-        }
-
-        .dockf {
-            left: 78vw;
         }
 
         .dockda,
@@ -436,58 +406,21 @@
         .dockdd,
         .dockde,
         .dockdf {
-            position: absolute;
-            top: 38vh;
-            border: 0px solid #1f0019;
-            border-radius: 6px;
-            height: 29.3vh;
+            position: relative;
+            display: flex;
+
+            height: 26.3vh;
             width: 11.5vh;
             background-image: linear-gradient(to bottom right, rgba(117, 96, 74, 0.2), rgba(56, 16, 16, 0.2));
-            vertical-align: middle;
             background-image: url('svg/dock.svg');
             background-size: 160vh 40vh;
-            background-position: 0.5vh -0.5vh;
+            background-position: 0.5vh -1.75vh;
             display: flex;
             justify-content: space-between;
             backdrop-filter: blur(4px);
             filter:
                 drop-shadow(0 0 2px #fb0000) drop-shadow(0 0 5px #ff9100);
             mix-blend-mode: screen;
-        }
-
-        .dockda {
-            left: 16.5vw;
-        }
-
-        .dockdb {
-            left: 28.5vw;
-        }
-
-        .dockdc {
-            left: 41.5vw;
-        }
-
-        .dockdd {
-            left: 54.5vw;
-        }
-
-        .dockde {
-            left: 67.5vw;
-        }
-
-        .dockdf {
-            left: 79.5vw;
-        }
-
-        #nixieclock {
-            position: absolute;
-            top: 51.5vh;
-            left: 0vh;
-            vertical-align: middle;
-            font-size: 25vh;
-            display: flex;
-            letter-spacing: 0.5em;
-            justify-content: space-between;
         }
     </style>
     <style>
@@ -564,9 +497,7 @@
             right: 1vw;
         }
 
-        #clockmesh {
-            display: block;
-        }
+
 
         .timeRecords {
             position: absolute;
@@ -625,8 +556,8 @@
                 allowtransparency="true"></iframe>
         </div>
         <div class="nixieclock">
-            <div id="parent">
-                <div id="clocka">
+            <div class="clockgit" id="clockgita">
+                <div class="git" id="gita">
                     <span id="digita5" class="digita" style="z-index: 10;">5</span>
                     <span id="digita6" class="digita" style="z-index: 9;">6</span>
                     <span id="digita7" class="digita" style="z-index: 8;">7</span>
@@ -638,7 +569,7 @@
                     <span id="digita0" class="digita" style="z-index: 2;">0</span>
                     <span id="digita1" class="digita" style="z-index: 1;">1</span>
                 </div>
-                <div id="clockb">
+                <div class="git" id="gitb">
                     <span id="digitb5" class="digitb" style="z-index: 10;">5</span>
                     <span id="digitb6" class="digitb" style="z-index: 9;">6</span>
                     <span id="digitb7" class="digitb" style="z-index: 8;">7</span>
@@ -650,7 +581,7 @@
                     <span id="digitb0" class="digitb" style="z-index: 2;">0</span>
                     <span id="digitb1" class="digitb" style="z-index: 1;">1</span>
                 </div>
-                <div id="clockc">
+                <div class="git" id="gitc">
                     <span id="digitc5" class="digitc" style="z-index: 10;">5</span>
                     <span id="digitc6" class="digitc" style="z-index: 9;">6</span>
                     <span id="digitc7" class="digitc" style="z-index: 8;">7</span>
@@ -662,7 +593,7 @@
                     <span id="digitc0" class="digitc" style="z-index: 2;">0</span>
                     <span id="digitc1" class="digitc" style="z-index: 1;">1</span>
                 </div>
-                <div id="clockd">
+                <div class="git" id="gitd">
                     <span id="digitd5" class="digitd" style="z-index: 10;">5</span>
                     <span id="digitd6" class="digitd" style="z-index: 9;">6</span>
                     <span id="digitd7" class="digitd" style="z-index: 8;">7</span>
@@ -674,7 +605,7 @@
                     <span id="digitd0" class="digitd" style="z-index: 2;">0</span>
                     <span id="digitd1" class="digitd" style="z-index: 1;">1</span>
                 </div>
-                <div id="clocke">
+                <div class="git" id="gite">
                     <span id="digite5" class="digite" style="z-index: 10;">5</span>
                     <span id="digite6" class="digite" style="z-index: 9;">6</span>
                     <span id="digite7" class="digite" style="z-index: 8;">7</span>
@@ -686,7 +617,7 @@
                     <span id="digite0" class="digite" style="z-index: 2;">0</span>
                     <span id="digite1" class="digite" style="z-index: 1;">1</span>
                 </div>
-                <div class="clockf">
+                <div class="git" id="gitf">
                     <span id="digitf5" class="digitf" style="z-index: 10;">5</span>
                     <span id="digitf6" class="digitf" style="z-index: 9;">6</span>
                     <span id="digitf7" class="digitf" style="z-index: 8;">7</span>
@@ -698,62 +629,76 @@
                     <span id="digitf0" class="digitf" style="z-index: 2;">0</span>
                     <span id="digitf1" class="digitf" style="z-index: 1;">1</span>
                 </div>
-
             </div>
         </div>
         <div id="clockmesh">
-            <div class="Clock-Wrappera"></div>
-            <div class="Clock-Wrapperb"></div>
-            <div class="Clock-Wrapperc"></div>
-            <div class="Clock-Wrapperd"></div>
-            <div class="Clock-Wrappere"></div>
-            <div class="Clock-Wrapperf"></div>
+            <div class="clock">
+                <div class="Clock-Wrappera"></div>
+                <div class="Clock-Wrapperb"></div>
+                <div class="Clock-Wrapperc"></div>
+                <div class="Clock-Wrapperd"></div>
+                <div class="Clock-Wrappere"></div>
+                <div class="Clock-Wrapperf"></div>
+            </div>
+        </div>
+        <div id="clockmesh1">
+            <div class="clock">
+                <div class="room-Wrappera"></div>
+                <div class="room-Wrapperb"></div>
+                <div class="room-Wrapperc"></div>
+                <div class="room-Wrapperd"></div>
+                <div class="room-Wrappere"></div>
+                <div class="room-Wrapperf"></div>
+            </div>
+        </div>
 
-            <div class="room-Wrappera"></div>
-            <div class="room-Wrapperb"></div>
-            <div class="room-Wrapperc"></div>
-            <div class="room-Wrapperd"></div>
-            <div class="room-Wrappere"></div>
-            <div class="room-Wrapperf"></div>
-
-            <div class="docka"></div>
-            <div class="dockb"></div>
-            <div class="dockc"></div>
-            <div class="dockd"></div>
-            <div class="docke"></div>
-            <div class="dockf"></div>
-
-            <div class="dockda"></div>
-            <div class="dockdb"></div>
-            <div class="dockdc"></div>
-            <div class="dockdd"></div>
-            <div class="dockde"></div>
-            <div class="dockdf"></div>
-            <div class="wrappera">
-                <div class="displaya">
+        <div id="clockmesh2">
+            <div class="clock">
+                <div class="docka"></div>
+                <div class="dockb"></div>
+                <div class="dockc"></div>
+                <div class="dockd"></div>
+                <div class="docke"></div>
+                <div class="dockf"></div>
+            </div>
+        </div>
+        <div id="clockmesh3">
+            <div class="clock">
+                <div class="dockda"></div>
+                <div class="dockdb"></div>
+                <div class="dockdc"></div>
+                <div class="dockdd"></div>
+                <div class="dockde"></div>
+                <div class="dockdf"></div>
+            </div>
+        </div>
+        <div id="clockmesh4">
+            <div class="clock">
+                <div class="wrappera">
+                    <div class="displaya">
+                    </div>
+                </div>
+                <div class="wrapperb">
+                    <div class="displaya">
+                    </div>
+                </div>
+                <div class="wrapperc">
+                    <div class="displaya">
+                    </div>
+                </div>
+                <div class="wrapperd">
+                    <div class="displaya">
+                    </div>
+                </div>
+                <div class="wrappere">
+                    <div class="displaya">
+                    </div>
+                </div>
+                <div class="wrapperf">
+                    <div class="displaya">
+                    </div>
                 </div>
             </div>
-            <div class="wrapperb">
-                <div class="displaya">
-                </div>
-            </div>
-            <div class="wrapperc">
-                <div class="displaya">
-                </div>
-            </div>
-            <div class="wrapperd">
-                <div class="displaya">
-                </div>
-            </div>
-            <div class="wrappere">
-                <div class="displaya">
-                </div>
-            </div>
-            <div class="wrapperf">
-                <div class="displaya">
-                </div>
-            </div>
-
         </div>
 
         <div class="digitdota">:</div>
@@ -768,15 +713,16 @@
     </div>
     <script>
         window.onload = function () {
-            clockmesh.style.display = 'none'
-        }
+            // 隐藏所有 clockmesh
+            document.querySelectorAll('[id^="clockmesh"]').forEach(mesh => {
+                mesh.style.display = 'on';
+            });
+        };
+
         document.getElementById('meshdisplay').addEventListener('click', function () {
-            var clockmesh = document.getElementById('clockmesh');
-            if (clockmesh.style.display === 'none') {
-                clockmesh.style.display = 'block';
-            } else {
-                clockmesh.style.display = 'none';
-            }
+            document.querySelectorAll('[id^="clockmesh"]').forEach(mesh => {
+                mesh.style.display = (mesh.style.display === 'none') ? 'block' : 'none';
+            });
         });
     </script>
 
