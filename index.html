@@ -8,6 +8,25 @@
     <link rel="shortcut icon" href="nixie.ico">
     <link rel="stylesheet" href="style/color.css">
     <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            color: #fb7c00;
+            font-family: 'Nixiebold-bold', Arial, sans-serif;
+            line-height: 2vh;
+            letter-spacing: 0.5em;
+            line-height: 1.5em;
+            overflow: hidden;
+            background: black;
+        }
+
         #div1 {
             position: fixed;
             display: flex;
@@ -96,9 +115,6 @@
         }
     </script>
     <style>
-        #parent {}
-    </style>
-    <style>
         @font-face {
             font-family: 'Nixiebold-bold';
             src: url('fonts/Nixiebold-bold.woff2') format('woff2'),
@@ -153,22 +169,6 @@
             display: none;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #000000;
-            color: #fb7c00;
-            font-family: 'Nixiebold-bold', Arial, sans-serif;
-            line-height: 2vh;
-            letter-spacing: 0.5em;
-            line-height: 1.5em;
-        }
 
         .nixieclock,
         #clockmesh,
@@ -211,11 +211,8 @@
         #clockmesh2,
         #clockmesh3,
         #clockmesh4 {
-
             z-index: 10;
         }
-
-        #clockmesh1 {}
 
         #clockmesh2 {
             top: 66vh;
@@ -226,10 +223,8 @@
             top: 52vh;
         }
 
-
         #clockmesh4 {
             z-index: -0;
-
         }
 
         .clockgit,
@@ -267,13 +262,11 @@
 
         }
 
-
         .nixiebold {
             font-family: 'Nixiebold-bold';
         }
 
         .nixieslim {
-
             background: linear-gradient(45deg, #ff9900, #ff00cc);
             -webkit-background-clip: text;
             color: transparent;
@@ -304,29 +297,35 @@
             /* 重新变亮 */
         }
 
+        .digitdot {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
         .digitdota,
         .digitdotb {
-            position: absolute;
-            top: 55vh;
+            flex-grow: 1;
+            max-width: 23.5%;
+            /* 限制最大宽度 */
+            margin: 0 2vh;
+            text-align: center;
+            top: 4vh;
+            position: relative;
+            /* 让 top 生效 */
             font-size: 26vh;
-            width: 100vw;
-            display: flex;
             line-height: 2vh;
-            justify-content: space-between;
             color: rgb(251, 124, 0);
             font-family: 'Nixiebold-mini', Arial, sans-serif;
             z-index: 99;
             animation: breathe 2s infinite ease-in-out;
-            /* 让动画持续运行 */
         }
 
-        .digitdota {
-            left: 33.25vw;
-        }
 
-        .digitdotb {
-            left: 57.25vw;
-        }
 
         .digita,
         .digitb,
@@ -527,7 +526,6 @@
         <iframe src="szclockcolor.html"
             style="position:absolute; top:25vh; width:200%; height:100%; background-color:transparent;border:none;"
             allowtransparency="true"></iframe>
-
     </div>
 
     <script>
@@ -559,6 +557,10 @@
             <iframe src="solar.html"
                 style="position:absolute; top:-20vh; left: -35.5vw; width:175%; height:175%; background-color:transparent;border:none;"
                 allowtransparency="true"></iframe>
+        </div>
+        <div class="digitdot">
+            <div class="digitdota">:</div>
+            <div class="digitdotb">:</div>
         </div>
         <div class="nixieclock">
             <div class="clockgit" id="clockgita">
@@ -706,8 +708,6 @@
             </div>
         </div>
 
-        <div class="digitdota">:</div>
-        <div class="digitdotb">:</div>
         <div class="digitimer">
             <p id="timer">0.000</p>
         </div>
